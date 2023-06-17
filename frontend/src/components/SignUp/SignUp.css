@@ -4,3 +4,10 @@
     align-items: center;
     padding-top: 25px;
   }
+  .login__input {
+    display: flex;
+    width: 500px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid lightgray;
+  }
