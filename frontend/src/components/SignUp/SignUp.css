@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 30px;
+    padding-top: 25px;
   } 
   .login__input {
     display: flex;
@@ -13,7 +13,7 @@
   }
   .login__subTitle {
     color: #444444;
-    font-size: 15px;
+    font-size: 13px;
   }
   .login__inputContainer {
     margin-bottom: 30px;
@@ -22,30 +22,30 @@
     background-color: #3bc4d4;
     border-color: #3bc4d4;
     color: white;
-    width: 130px;
-    height: 40px;
+    width: 140px;
+    height: 50px;
     border: 1px solid;
     border-radius: 3px;
     cursor: pointer;
   }
   .login__button:hover {
     background-color: black;
-    color: black;
+    color: white;
   }
   .login__link {
-    padding-top: 25px;
+    padding-top: 10px;
   }
   .login__link:hover {
     text-decoration: underline;
   }
   @media only screen and (max-width: 600px) {
     .login__input {
-      width: 250px;
+      width: 300px;
     }
   }
   @media only screen and (max-width: 300px) {
     .login__subContainer {
-      margin-left: 50px;
+      margin-left: 40px;
     }
   }
   
