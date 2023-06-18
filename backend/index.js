@@ -19,6 +19,4 @@ app.post('/create', async (req, res) => {
 	res.send({ msg: 'User Added' });
 });
 
-
-
 app.listen(PORT, () => console.log(`Up & RUnning at http://localhost:${PORT}`));
