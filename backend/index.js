@@ -19,7 +19,7 @@ app.post('/create', async (req, res) => {
 	res.send({ msg: 'User Added' });
 });
 
-pp.post('/update', async (req, res) => {
+app.post('/update', async (req, res) => {
 	const id = req.body.id;
 	delete req.body.id;
 	const data = req.body;
