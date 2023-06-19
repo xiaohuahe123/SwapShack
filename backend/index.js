@@ -30,7 +30,7 @@ app.post('/update', async (req, res) => {
 app.post('/delete', async (req, res) => {
 	const id = req.body.id;
 	await User.doc(id).delete();
-	res.send({ msg: 'Deleted' });
+	res.send({ msg: 'Deleted' }); 
 });
 
 app.listen(PORT, () => console.log(`Up & RUnning at http://localhost:${PORT}`));
