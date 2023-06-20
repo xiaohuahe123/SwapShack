@@ -1,11 +1,31 @@
 import React, { useState, useContext, useEffect, useReducer } from 'react';
 import './Login.css';
+import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-
+import BartContext from '../../store/bartContext';
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const { login, isLoggedIn, showLogout, setShowLogout } = useContext(BartContext);
+	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const data = {
+				email: email,
+				password: password,
+				returnSecureToken: true
+			};
+			const response = await axios.post('http://localhost:4000/login', data, {
+				headers: { 'Content-Type': 'application/json' }
+			});
+			login(response.data.idToken, response.data.email);
+			navigate('/home');
+			console.log(isLoggedIn);
+		} catch (err) {
+			console.log(err);
+			alert(err.message);
+		}
 	};
 
 	return (
@@ -37,4 +57,3 @@ const Login = () => {
 };
 
 export default Login;
-
