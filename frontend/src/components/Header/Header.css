@@ -1,0 +1,31 @@
+.header {
+    display: flex;
+    height: 90px;
+    width: 100%;
+    /* line-height: 90px; */
+    background-color: #f9f9f9;
+  }
+  .header__Container {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .hedaer__Right {
+    display: flex;
+    max-height: 90px;
+  }
+  .header__singleLink {
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 33px;
+    color: #0d0d0d;
+  }
+  .header__icons {
+    display: flex;
+    margin-top: 0px;
+    align-items: center;
+  }
+  
+  
+  

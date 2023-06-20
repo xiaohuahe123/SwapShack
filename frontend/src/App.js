@@ -5,14 +5,17 @@ import Header from './components/Header/Header';
 import Login from './components/Login/Login';
 
 function App() {
+	const [isMove, setIsMove] = useState(false);
+
 	return (		
 		
-				<div className="app">
-					<Routes>
-						<Route path="/" element={<Login />} />
-						<Route path="/login" element={<Login />} />
-					</Routes>
-				</div>
+			<div className="app">
+				<Header setIsPane={setIsMove} />
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route path="/login" element={<Login />} />
+				</Routes>
+			</div>
 			
 	);
 }
