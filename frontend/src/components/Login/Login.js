@@ -8,6 +8,12 @@ const Login = () => {
 	const [password, setPassword] = useState('');
 	const { login, isLoggedIn, showLogout, setShowLogout } = useContext(BartContext);
 	const navigate = useNavigate();
+    useEffect(() => {
+		if (isLoggedIn === true) {
+			navigate('/home');
+			setShowLogout(true);
+		}
+	}, []);
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
