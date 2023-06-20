@@ -14,10 +14,39 @@ const BartProvider = (props) => {
     const logout = () => {
 		setShowLogout(false);
 	};
-    let bartValue = {
-		logout: logout,
-		setShowLogout: setShowLogout
+    
+	const [isLoggedIn, setIsLoggedIn] = useState(() => {
+		if (localStorage.getItem('tokenId')) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+	const [token, setToken] = useState(() => {
+		return localStorage.getItem('tokenId') || null;
+	});
+	const [email, setEmail] = useState(() => {
+		if (localStorage.getItem('userEmail')) {
+			return localStorage.getItem('userEmail');
+		} else {
+			return '';
+		}
+	});
+	const login = (token, email) => {
+		setToken(token);
+		setEmail(email);
+		setIsLoggedIn(true);	
 	};
+
+	let bartValue = {
+		logout: logout,
+		setShowLogout: setShowLogout,
+		token: token,
+		isLoggedIn: isLoggedIn,
+		email: email,
+		showLogout: showLogout,
+	};
+	
     
     return <BartContext.Provider value={bartValue}>{props.children}</BartContext.Provider>;
 };
