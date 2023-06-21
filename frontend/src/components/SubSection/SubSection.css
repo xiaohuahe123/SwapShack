@@ -1,0 +1,22 @@
+.sub__container1 {
+    background-color: #f6f6f6;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 150px;
+  }
+  .container__content {
+    padding-top: 20px;
+    align-self: center;
+    padding-left: 80px;
+  }
+  .container__title {
+    font-size: 25px;
+    text-align: left;
+    line-height: 1.5;
+  }
+  .container__section {
+    font-size: 14px;
+    text-align: left !important;
+  }
+  
