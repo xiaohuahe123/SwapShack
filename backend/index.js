@@ -16,7 +16,7 @@ app.get('/', async (req, res) => {
 app.post('/create', async (req, res) => {
 	const data = req.body;
 	await User.add({ data });
-	res.send({ msg: 'User Added' });
+	res.send({ msg: 'User Added' }); 
 });
 
 app.post('/update', async (req, res) => {
