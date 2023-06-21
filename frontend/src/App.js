@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 
 
 function App() {
+	const [isMove, setIsMove] = useState(false);
 	return (		
 			<BartProvider>
 				<div className="app">
