@@ -12,3 +12,5 @@ const SubSection = ({ section }) => {
 		</div>
 	);
 };
+
+export default SubSection;
