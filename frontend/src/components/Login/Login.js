@@ -3,6 +3,7 @@ import './Login.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import BartContext from '../../store/bartContext';
+import SubSection from '../SubSection/SubSection';
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -36,6 +37,7 @@ const Login = () => {
 
 	return (
 		<div className="login">
+			<SubSection section="Login" />
 			<div className="login__container">
 				<div className="login__subContainer">
 					<form onSubmit={handleSubmit}>
