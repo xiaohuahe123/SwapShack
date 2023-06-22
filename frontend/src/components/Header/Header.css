@@ -13,7 +13,7 @@
   }
   .hedaer__Right {
     display: flex;
-    max-height: 90px;
+    max-height: 80px;
   }
   .header__singleLink {
     cursor: pointer;

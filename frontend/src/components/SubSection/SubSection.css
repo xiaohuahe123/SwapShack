@@ -1,22 +1,48 @@
 .sub__container1 {
+
+ /* Sets the background color to light grey color */  
     background-color: #f6f6f6;
+
+    /* Centers the background image horizontally and vertically */
     background-position: center center;
+
+    /* Prevents the background image from repeating */
     background-repeat: no-repeat;
+
+    /* Scales the background image to cover the entire container */
     background-size: cover;
+
+    /* Sets the height of the container to 150px */
     height: 150px;
   }
   .container__content {
+
+     /* Adds a top padding of 20px */
     padding-top: 20px;
+
+    /* Aligns the content to the center horizontally */
     align-self: center;
+
+    /* Adds a left padding of 80px */
     padding-left: 80px;
   }
   .container__title {
+
+      /* Sets the font size to 25px */
     font-size: 25px;
+
+    /* Aligns the text to the left */
     text-align: left;
+
+     /* Sets the line height to 1.5 */
     line-height: 1.5;
   }
   .container__section {
+
+    /* Sets the font size to 14px */
     font-size: 14px;
+
+    /* Aligns the text to the left using !important to override other styles */
     text-align: left !important;
   }
   

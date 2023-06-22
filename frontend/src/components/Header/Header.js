@@ -9,7 +9,7 @@ const Header = ({ setIsPane }) => {
 			<div className="header__Container">
 				<div className="header__Left">
 					<div className="header__Icon">
-						<h3 className="header__title" style={{ fontWeight: 'bold', fontStyle: 'italic', fontSize:"50px"}}>
+						<h3 className="header__title" style={{ fontWeight: 'bold', fontStyle: 'italic', fontSize:"70px"}}>
 							SwapShack
 						</h3>
 					</div>

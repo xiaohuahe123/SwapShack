@@ -1,3 +1,3 @@
 # https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow:
+User-agent: *               // All user agents (web robots) are affected.
+Disallow:                   // No specific pages or files are disallowed for crawling
