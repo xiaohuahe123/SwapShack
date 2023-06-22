@@ -6,8 +6,8 @@
   }
   .login__input {
     display: flex;
-    width: 200px;
-    height: 40px;
+    width: 500px;
+    height: 50px;
     background-color: white;
     border: 1px solid lightgray;
   }

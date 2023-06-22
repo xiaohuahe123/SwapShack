@@ -1,15 +1,23 @@
 import React, { useState,  Suspense } from 'react';
 import './App.css';
+import Header from './components/Header/Header';
 import BartProvider from './store/BartProvider';
 import { Routes, Route } from 'react-router-dom';
-import Login from './components/Login/Login';
-import Header from './components/Header/Header';
-import SignUp from './components/SignUp/SignUp';
+import CircularProgress from '@mui/material/CircularProgress';
 
-
+//fetch data asynchronously using the React.lazy Inside the Suspense boundary
+const Login = React.lazy(() => import('./components/Login/Login'));
+const SignUp = React.lazy(() => import('./components/SignUp/SignUp'));
 function App() {
 	const [isMove, setIsMove] = useState(false);
-	return (		
+
+	return (
+		<Suspense
+			fallback={
+				<div style={{ display: 'flex', justifyContent: 'center', alignItem: 'center', paddingTop: '300px' }}>
+					<CircularProgress color="primary" size={100} />
+				</div>
+			}>
 			<BartProvider>
 				<div className="app">
 					<Header setIsPane={setIsMove} />
@@ -19,7 +27,9 @@ function App() {
 						<Route path="/sign-up" element={<SignUp />} />
 					</Routes>
 				</div>
-			</BartProvider>	
+			</BartProvider>
+		</Suspense>
 	);
 }
+
 export default App;
