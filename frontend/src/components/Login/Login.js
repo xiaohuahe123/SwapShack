@@ -26,6 +26,7 @@ const Login = () => {
 			const response = await axios.post('http://localhost:4000/login', data, {
 				headers: { 'Content-Type': 'application/json' }
 			});
+			//call login function ,update isLoggedIn,trigger useEffect()  (side effect) to navigate to home
 			login(response.data.idToken, response.data.email);
 			navigate('/home');
 			console.log(isLoggedIn);
