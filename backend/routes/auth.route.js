@@ -31,6 +31,5 @@ authRouter.post('/signup', async (req, res) => {
 	});
 });
 
-
 module.exports = authRouter;
 
