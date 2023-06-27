@@ -45,6 +45,7 @@ const BartProvider = (props) => {
 		isLoggedIn: isLoggedIn,
 		email: email,
 		showLogout: showLogout,
+		login:login
 	};
 	
     

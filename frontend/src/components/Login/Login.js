@@ -4,6 +4,9 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import BartContext from '../../store/bartContext';
 import SubSection from '../SubSection/SubSection';
+import { appas as firebase} from '../../firebase/firebase';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
 const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -23,11 +26,20 @@ const Login = () => {
 				password: password,
 				returnSecureToken: true
 			};
-			const response = await axios.post('http://localhost:4000/login', data, {
-				headers: { 'Content-Type': 'application/json' }
-			});
+
+			const auth = getAuth();
+			//Use Firebase Auth to authenticate the user with email and password
+			const userCredential = await signInWithEmailAndPassword(auth,email, password);
+			const { user } = userCredential;
+			console.log(userCredential);
+			
+			// const response = await axios.post('http://localhost:4000/login', data, {
+			// 	headers: { 'Content-Type': 'application/json' }
+			// });
 			//call login function ,update isLoggedIn,trigger useEffect()  (side effect) to navigate to home
-			login(response.data.idToken, response.data.email);
+			login(user.idToken, user.email);
+			console.log('Login successful');
+
 			navigate('/home');
 			console.log(isLoggedIn);
 		} catch (err) {
