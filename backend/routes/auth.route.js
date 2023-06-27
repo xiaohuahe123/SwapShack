@@ -31,5 +31,36 @@ authRouter.post('/signup', async (req, res) => {
 	});
 });
 
+// User login
+authRouter.post('/login', async (req, res) => {
+	const { email, password } = req.body;
+
+	// Find the user with the provided email
+	const userQuery =  User.where('email', '==', email).limit(1);
+	const snapshot = await userQuery.get();
+
+	if (snapshot.empty) {
+		return res.status(401).json({ message: 'Invalid credentials' });
+	}
+
+	const user = snapshot.docs[0].data();
+
+	// Compare the provided password with the stored hashed password
+	bcrypt.compare(password, user.password, (err, result) => {
+		if (err) {
+			return res.status(500).json({ message: 'Error comparing passwords' });
+		}
+
+		if (!result) {
+			return res.status(401).json({ message: 'Invalid credentials' });
+		}
+
+		// Generate a JWT token
+		const token = jwt.sign({ userId: user.id }, 'secretKey', { expiresIn: '1h' });
+
+		res.status(200).json({ token });
+	});
+});
+
 module.exports = authRouter;
 
