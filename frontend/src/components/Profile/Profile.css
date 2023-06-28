@@ -3,13 +3,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 25px;
   }
 
   /* Styles for the input fields */
   .profile__input {
     display: flex;
-    width: 300px;
+    width: 500px;
     height: 50px;
     background-color: white;
     border: 1px solid lightgray;
@@ -18,12 +18,12 @@
   /* Styles for the profile subtitle */
   .profile__subTitle {
     color: #444444;
-    font-size: 10px;
+    font-size: 13px;
   }
 
   /* Styles for the input container */
   .profile__inputContainer {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
 
   /* Styles for the button */
@@ -47,7 +47,7 @@
 
   /* Styles for the link */
   .profile__link {
-    padding-top: 11px;
+    padding-top: 10px;
   }
 
   /* Hover styles for the link */
@@ -65,7 +65,7 @@
   /* Media query for screens with a maximum width of 300px */
   @media only screen and (max-width: 300px) {
     .profile__subContainer {
-      margin-left: 35px;
+      margin-left: 40px;
     }
   }
   
