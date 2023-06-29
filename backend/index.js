@@ -2,11 +2,20 @@ const express = require('express');
 const cors = require('cors');
 const User = require('./config');
 const routes = require('./routes/routes');
+const path = require('path');
 const app = express();
 app.use(express.json());
 app.use(cors());
 
 const PORT = 4000
+
+// Serve static files from the 'frontend/build' directory
+app.use(express.static(path.join(__dirname,"..", 'frontend', 'build')));
+
+// Route all requests to the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname,"..", 'frontend', 'build', 'index.html'));
+});
 
 app.use('/api', routes);
 
@@ -24,7 +33,7 @@ app.post('/create', async (req, res) => {
 	res.send({ msg: 'User Added' }); 
 });
 
-//UPDATE existing user info
+//UPDATE existing info
 app.post('/update', async (req, res) => {
 	const id = req.body.id;
 	delete req.body.id;
@@ -33,7 +42,7 @@ app.post('/update', async (req, res) => {
 	res.send({ msg: 'Updated' });
 });
 
-//DELETE existing user
+//DELETE info
 app.post('/delete', async (req, res) => {
 	const id = req.body.id;
 	await User.doc(id).delete();

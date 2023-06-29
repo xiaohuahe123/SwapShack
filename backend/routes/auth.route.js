@@ -1,7 +1,9 @@
 const { Router } = require('express');
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
+const authenticateToken = require('../middlewares/verifyToken,js');
 const { Users } = require('../config');
+
 
 const authRouter = Router();
 authRouter.post('/signup', async (req, res) => {
@@ -60,6 +62,11 @@ authRouter.post('/login', async (req, res) => {
 
 		res.status(200).json({ token });
 	});
+});
+
+// Private API endpoint
+authRouter.get('/private', authenticateToken, (req, res) => {
+	res.status(200).json({ message: 'Private API accessed successfully' });
 });
 
 module.exports = authRouter;
