@@ -8,6 +8,8 @@ app.use(cors());
 
 const PORT = 4000
 
+app.use('/api', routes);
+
 //GET user info
 app.get('/', async (req, res) => {
 	const snapshot = await User.get();
