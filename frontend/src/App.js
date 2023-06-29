@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import BartProvider from './store/BartProvider';
 import { Routes, Route } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import Profile from './components/Profile/Profile';
 
 //fetch data asynchronously using the React.lazy Inside the Suspense boundary
 const Login = React.lazy(() => import('./components/Login/Login'));
@@ -25,6 +26,7 @@ function App() {
 						<Route path="/" element={<Login />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/sign-up" element={<SignUp />} />
+						<Route path="/profile" element={<Profile />} />
 					</Routes>
 				</div>
 			</BartProvider>
