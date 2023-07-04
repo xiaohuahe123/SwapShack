@@ -1,9 +1,12 @@
-import React, {  } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './Header.css';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import { NavLink } from 'react-router-dom';
+import BartContext from '../../store/bartContext';
 
 const Header = ({ setIsPane }) => {
+	const { login, isLoggedIn, logout } = useContext(BartContext);
+
 	return (
 		<div className="header">
 			<div className="header__Container">
@@ -35,6 +38,15 @@ const Header = ({ setIsPane }) => {
 								</NavLink>
 							</div>
 						</div>
+						{isLoggedIn && (
+							<div className="header__logout">
+								<div className="header__logout" onClick={logout}>
+									<NavLink to="/">
+										LogOut
+									</NavLink>
+								</div>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
