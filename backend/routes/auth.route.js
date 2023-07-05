@@ -1,10 +1,9 @@
 const { Router } = require('express');
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
-const authenticateToken = require('../middlewares/verifyToken.js');
+const { authenticateToken } = require('../middlewares/verifyToken.js');
 const { Users } = require('../config');
 const bcrypt = require('bcrypt');
-
 
 const authRouter = Router();
 authRouter.post('/signup', async (req, res) => {
@@ -39,7 +38,7 @@ authRouter.post('/login', async (req, res) => {
 	const { email, password } = req.body;
 
 	// Find the user with the provided email
-	const userQuery =  User.where('email', '==', email).limit(1);
+	const userQuery =  Users.where('email', '==', email).limit(1);
 	const snapshot = await userQuery.get();
 
 	if (snapshot.empty) {

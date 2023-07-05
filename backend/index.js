@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const User = require('./config');
+const { Users } = require('./config');
 const routes = require('./routes/routes');
 const path = require('path');
 const app = express();
@@ -13,7 +13,7 @@ const PORT = 4000
 app.use(express.static(path.join(__dirname,"..", 'frontend', 'build')));
 
 // Route all requests to the React app
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname,"..", 'frontend', 'build', 'index.html'));
 });
 
@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
 //CREATE new users
 app.post('/create', async (req, res) => {
 	const data = req.body;
-	await User.add({ data });
+	await Users.add({ data });
 	res.send({ msg: 'User Added' }); 
 });
 
@@ -38,14 +38,14 @@ app.post('/update', async (req, res) => {
 	const id = req.body.id;
 	delete req.body.id;
 	const data = req.body;
-	await User.doc(id).update(data);
+	await Users.doc(id).update(data);
 	res.send({ msg: 'Updated' });
 });
 
 //DELETE info
 app.post('/delete', async (req, res) => {
 	const id = req.body.id;
-	await User.doc(id).delete();
+	await Users.doc(id).delete();
 	res.send({ msg: 'Deleted' }); 
 });
 

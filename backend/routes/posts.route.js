@@ -2,8 +2,6 @@ const { Router } = require('express');
 const posts = require('./posts');
 const postRouter = Router();
 
-postRouter.use(express.json());
-
 // Get all posts
 postRouter.get('/posts', async (req, res) => {
 	try {

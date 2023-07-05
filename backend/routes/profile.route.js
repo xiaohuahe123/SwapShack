@@ -3,6 +3,23 @@ const profileRouter = express.Router();
 const { Users } = require('../config');
 const { authenticateToken } = require('../middlewares/verifyToken');
 
+// Fetch all profiles
+profileRouter.get('/', async (req, res) => {
+	try {
+		const profilesRef = Users;
+		const snapshot = await profilesRef.get();
+		const profiles = [];
+
+		snapshot.forEach((doc) => {
+			profiles.push({ id: doc.id, ...doc.data() });
+		});
+
+		res.json(profiles);
+	} catch (error) {
+		res.status(500).json({ error: { message: 'Failed to fetch profiles' } });
+	}
+});
+
 // Create a new profile
 profileRouter.post('/', authenticateToken, async (req, res) => {
 	try {
