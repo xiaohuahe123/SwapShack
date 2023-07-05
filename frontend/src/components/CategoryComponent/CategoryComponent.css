@@ -1,0 +1,66 @@
+/* Define styles for the CategoryComponent */
+
+.category-component {
+	padding: 20px;
+}
+
+.category-component h2 {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.category-component input[type='text'] {
+	width: 100%;
+	padding: 8px;
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.category-component ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.category-component li {
+	cursor: pointer;
+	padding: 8px;
+	background-color: #f2f2f2;
+	border-radius: 4px;
+	margin-bottom: 5px;
+}
+
+.category-component li.selected {
+	background-color: #e0e0e0;
+}
+
+.category-component div.edit-container {
+	margin-top: 10px;
+}
+
+.category-component h3 {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.category-component input[type='text'].edit-input {
+	width: 100%;
+	padding: 8px;
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.category-component button {
+	padding: 8px 16px;
+	font-size: 16px;
+	margin-right: 10px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.category-component button.cancel-button {
+	background-color: #f44336;
+}
