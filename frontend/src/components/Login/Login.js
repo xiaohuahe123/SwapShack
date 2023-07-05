@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import BartContext from '../../store/bartContext';
 import SubSection from '../SubSection/SubSection';
-import { appas as firebase} from '../../firebase/firebase';
+import { app  as firebase} from '../../firebase/firebase';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const Login = () => {
@@ -21,31 +21,37 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const data = {
-				email: email,
-				password: password,
-				returnSecureToken: true
-			};
-
-			const auth = getAuth();
-			//Use Firebase Auth to authenticate the user with email and password
-			const userCredential = await signInWithEmailAndPassword(auth,email, password);
-			const { user } = userCredential;
-			console.log(userCredential);
-			
-			// const response = await axios.post('http://localhost:4000/login', data, {
-			// 	headers: { 'Content-Type': 'application/json' }
-			// });
-			//call login function ,update isLoggedIn,trigger useEffect()  (side effect) to navigate to home
-			login(user.idToken, user.email);
-			console.log('Login successful');
-
-			navigate('/home');
-			console.log(isLoggedIn);
+			// const data = {
+			// 	email: email,
+			// 	password: password,
+			// 	returnSecureToken: true
+			// };
+			// const auth = getAuth();
+			// //Use Firebase Auth to authenticate the user with email and password
+			// const userCredential = await signInWithEmailAndPassword(auth,email, password);
+			// const { user } = userCredential;
+			// console.log(userCredential);			
+			// login(user.idToken, user.email);
+			const response = await fetch('/auth/login', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email, password })
+			});
+			const data = await response.json();
+			if (data.token) {
+				console.log('Login successful');
+				login(data.token, data.user);
+				navigate('/home');
+				console.log(isLoggedIn);
+			} else if (data.error) {
+				throw data.error;
+			}
 		} catch (err) {
 			console.log(err);
 			alert(err.message);
 		}
+
+		
 	};
 
 	return (
