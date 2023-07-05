@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
-const authenticateToken = require('../middlewares/verifyToken,js');
+const authenticateToken = require('../middlewares/verifyToken.js');
 const { Users } = require('../config');
 const bcrypt = require('bcrypt');
 
