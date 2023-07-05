@@ -1,3 +1,4 @@
+const admin = require('firebase-admin');
 const jwt = require('jsonwebtoken');
 
 // Verify JWT middleware
@@ -37,4 +38,4 @@ const authenticateToken = (req, res, next) => {
 	});
 };
 
-module.exports = authenticateToken;
+module.exports = { authenticateToken, verifyToken };

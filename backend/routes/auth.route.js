@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const authenticateToken = require('../middlewares/verifyToken,js');
 const { Users } = require('../config');
+const bcrypt = require('bcrypt');
 
 
 const authRouter = Router();
@@ -14,7 +15,7 @@ authRouter.post('/signup', async (req, res) => {
 	const snapshot = await userQuery.get();
 
 	if (!snapshot.empty) {
-		return res.status(409).json({ message: 'User already exists' });
+		return res.status(409).json({ error: { message: 'User already exists' } });
 	}
 
 	// Generate a new user ID
@@ -23,7 +24,7 @@ authRouter.post('/signup', async (req, res) => {
 	// Hash the password
 	bcrypt.hash(password, 10, async (err, hashedPassword) => {
 		if (err) {
-			return res.status(500).json({ message: 'Error hashing password' });
+			return res.status(500).json({ error: { message: 'Error hashing password' } });
 		}
 
 		// Store the user in Firestore
@@ -42,7 +43,7 @@ authRouter.post('/login', async (req, res) => {
 	const snapshot = await userQuery.get();
 
 	if (snapshot.empty) {
-		return res.status(401).json({ message: 'Invalid credentials' });
+		return res.status(401).json({ error: { message: 'Invalid credentials' } });
 	}
 
 	const user = snapshot.docs[0].data();
@@ -50,17 +51,17 @@ authRouter.post('/login', async (req, res) => {
 	// Compare the provided password with the stored hashed password
 	bcrypt.compare(password, user.password, (err, result) => {
 		if (err) {
-			return res.status(500).json({ message: 'Error comparing passwords' });
+			return res.status(500).json({ error: {message: 'Error comparing passwords' }});
 		}
 
 		if (!result) {
-			return res.status(401).json({ message: 'Invalid credentials' });
+			return res.status(401).json({ error: { message: 'Invalid credentials' } });
 		}
 
 		// Generate a JWT token
 		const token = jwt.sign({ userId: user.id }, 'secretKey', { expiresIn: '1h' });
-
-		res.status(200).json({ token });
+		delete user.password;
+		res.status(200).json({ token, user });
 	});
 });
 

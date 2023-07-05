@@ -13,12 +13,12 @@
   }
   .hedaer__Right {
     display: flex;
-    max-height: 80px;
+    max-height: 90px;
   }
   .header__singleLink {
     cursor: pointer;
     padding: 5px;
-    margin-right: 30px;
+    margin-right: 33px;
     color: #0d0d0d;
   }
   .header__icons {
@@ -27,11 +27,30 @@
     align-items: center;
   }
 
-  .header__logout {
+  .header__singleIcon {
     display: flex;
-    margin-top: -2px;
-    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 10px;
+    color: #0d0d0d;
   }
   
+  @media only screen and (max-width: 700px) {
+    .header__Container {
+      width: max-content;
+    }
   
+    .header__singleLinkText {
+      font-size: 8px;
+    }
+    .header__singleLink {
+      margin-right: 2px;
+    }
+    .header__title {
+      font-size: 10px;
+    }
+    .header__icons {
+      font-size: 8px;
+    }
+  }
   

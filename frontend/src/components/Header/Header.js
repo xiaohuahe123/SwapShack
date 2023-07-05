@@ -39,8 +39,8 @@ const Header = ({ setIsPane }) => {
 							</div>
 						</div>
 						{isLoggedIn && (
-							<div className="header__logout">
-								<div className="header__logout" onClick={logout}>
+							<div className="header__icons">
+								<div className="header__singleIcon" onClick={logout}>
 									<NavLink to="/">
 										LogOut
 									</NavLink>
