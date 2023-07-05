@@ -41,7 +41,8 @@ const SignUp = () => {
 			});
 
 			// After successful signup, navigate to the homepage
-			navigate('/');
+			if (response && response.error) alert(response.error);
+			if (response && response.data.message) navigate('/');
 		} catch (err) {
 			console.log(err);
 			alert(err);
