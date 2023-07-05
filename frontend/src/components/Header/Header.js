@@ -33,7 +33,7 @@ const Header = ({ setIsPane }) => {
 						</div>
 						<div className="header__icons">
 							<div className="header__singleIcon">
-								<NavLink to="/login">
+								<NavLink to="/profile">
 									<PersonOutlinedIcon className="header__icons" />
 								</NavLink>
 							</div>
