@@ -10,7 +10,21 @@ import React, { useState } from 'react';
 import BartContext from './bartContext';
 
 const BartProvider = (props) => {
+	const [token, setToken] = useState(() => {
+		return localStorage.getItem('tokenId') || null;
+	});
 	
+	const [headers, setHeaders] = useState(() => {
+		return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
+	});
+	const [user, setUser] = useState(() => {
+		const u = localStorage.getItem('user');
+		return u ? JSON.parse(u) : {};
+	});
+
+	const updateUser = (user) => {
+		localStorage.setItem('user', JSON.stringify(user));
+	};
     const [showLogout, setShowLogout] = useState(false);
     const logout = () => {
 		setToken(null);
@@ -27,20 +41,12 @@ const BartProvider = (props) => {
 			return false;
 		}
 	});
-	const [token, setToken] = useState(() => {
-		return localStorage.getItem('tokenId') || null;
-	});
-	const [email, setEmail] = useState(() => {
-		if (localStorage.getItem('userEmail')) {
-			return localStorage.getItem('userEmail');
-		} else {
-			return '';
-		}
-	});
-	const login = (token, email) => {
+	
+	const login = (token, user) => {
+		localStorage.setItem('tokenId', token);
+		localStorage.setItem('user', JSON.stringify(user));
 		setToken(token);
-		setEmail(email);
-		setIsLoggedIn(true);	
+		setIsLoggedIn(true);
 	};
 
 	let bartValue = {
@@ -48,9 +54,11 @@ const BartProvider = (props) => {
 		setShowLogout: setShowLogout,
 		token: token,
 		isLoggedIn: isLoggedIn,
-		email: email,
 		showLogout: showLogout,
-		login:login
+		login:login,
+		headers,
+		user: user,
+		setUser: updateUser
 	};
 	
     
