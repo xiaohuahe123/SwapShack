@@ -69,6 +69,17 @@ profileRouter.put('/:id', authenticateToken, async (req, res) => {
 	}
 });
 
+// Delete a profile
+profileRouter.delete('/:id', authenticateToken, async (req, res) => {
+	try {
+		const profileId = req.params.id;
+		const profileRef = Users.doc(profileId);
 
+		await profileRef.delete();
+		res.sendStatus(204);
+	} catch (error) {
+		res.status(500).json({ error: { message: 'Failed to delete profile' } });
+	}
+});
 
 module.exports = profileRouter;
