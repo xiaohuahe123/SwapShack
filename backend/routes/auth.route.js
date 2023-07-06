@@ -42,7 +42,7 @@ authRouter.post('/login', async (req, res) => {
 	const snapshot = await userQuery.get();
 
 	if (snapshot.empty) {
-		return res.status(401).json({ error: { message: 'Invalid credentials' } });
+		return res.status(401).json({ error: { message: 'Wrong Email or Password' } });
 	}
 
 	const user = snapshot.docs[0].data();
