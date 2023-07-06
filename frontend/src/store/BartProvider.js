@@ -10,9 +10,14 @@ import React, { useState } from 'react';
 import BartContext from './bartContext';
 
 const BartProvider = (props) => {
+	
     const [showLogout, setShowLogout] = useState(false);
     const logout = () => {
+		setToken(null);
+		setIsLoggedIn(false);
 		setShowLogout(false);
+		localStorage.removeItem('tokenId');
+		localStorage.removeItem('user');
 	};
     
 	const [isLoggedIn, setIsLoggedIn] = useState(() => {

@@ -5,7 +5,8 @@ const BartContext = createContext({
 	logout: () => {},
 	showLogout: false,
 	isLoggedIn: false,
-	login: (token,email) => {}
+	login: (token, user) => {},
+	
 });
 
 export default BartContext;

@@ -15,11 +15,12 @@ const CategoryComponent = ({
     const [searchText, setSearchText] = useState('');
     const [newItemName, setNewItemName] = useState(''); // State for new item name
      
+	//filtering the items based on the search text
     const filterItems = (searchText) => {
 		const filteredItems = items.filter((item) => item[itemNameField].toLowerCase().includes(searchText.toLowerCase()));
 		return filteredItems;
 	};
-
+  //dynamicallly update based on search text
 	const filteredItems = filterItems(searchText);
 
     const handleCreateItem = () => {
@@ -37,15 +38,21 @@ const CategoryComponent = ({
 	
     return(
         <div className="category-component">
+			
             <h2>{collectionName}</h2>
 			<input type="text" placeholder={`Search ${collectionName}...`} value={searchText} onChange={(e) => setSearchText(e.target.value)} />
 			<ul>
+				{/* the filtered list of items and 'selected' CSS class is applied*/}
 				{filteredItems.map((item) => (
+					
 					<li key={item.id} className={selectedItem && selectedItem.id === item.id ? 'selected' : ''} onClick={() => selectItem(item)}>
 						{item[itemNameField]}
 					</li>
 				))}
 			</ul>
+
+			{/* if selectedItem have value then render below div */}
+
 			{selectedItem && (
 				<div>
 					<h3>Edit {collectionName}</h3>
