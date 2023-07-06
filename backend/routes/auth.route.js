@@ -14,7 +14,7 @@ authRouter.post('/signup', async (req, res) => {
 	const snapshot = await userQuery.get();
 
 	if (!snapshot.empty) {
-		return res.status(409).json({ error: { message: 'User already exists' } });
+		return res.status(409).json({ error: { message: 'User/Email already exists' } });
 	}
 
 	// Generate a new user ID

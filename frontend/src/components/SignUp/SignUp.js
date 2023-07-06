@@ -29,7 +29,7 @@ const SignUp = () => {
 			if (response && response.data.message) navigate('/');
 		} catch (err) {
 			console.log(err);
-			alert(err);
+			alert(err.response.data.error.message);
 		}
 	};
 	return (
