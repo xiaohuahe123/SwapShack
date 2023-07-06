@@ -10,50 +10,57 @@ import React, { useState } from 'react';
 import BartContext from './bartContext';
 
 const BartProvider = (props) => {
-	
-    const [showLogout, setShowLogout] = useState(false);  // State variable to manage the visibility of logout button
-    const logout = () => { // Function to handle the logout action
-		setToken(null);// Clear the token
-		setIsLoggedIn(false);  // Set isLoggedIn to false
-		setShowLogout(false); // Hide the logout button
-		localStorage.removeItem('tokenId'); // Remove the token from localStorage
-		localStorage.removeItem('user'); // Remove the user from localStorage
+	const [token, setToken] = useState(() => {
+		return localStorage.getItem('tokenId') || null;
+	});
+	const [user, setUser] = useState(() => {
+		const u = localStorage.getItem('user');
+		return u ? JSON.parse(u) : {};
+	});
+
+	const updateUser = (user) => {
+		localStorage.setItem('user', JSON.stringify(user));
 	};
-    
-	const [isLoggedIn, setIsLoggedIn] = useState(() => { // State variable to manage the login status
+
+	const [data, setData] = useState([]);
+	const [isLoggedIn, setIsLoggedIn] = useState(() => {
 		if (localStorage.getItem('tokenId')) {
-			return true; // If tokenId is present in localStorage, the user is logged in
+			return true;
 		} else {
-			return false; // Otherwise, the user is not logged in
+			return false;
 		}
 	});
-	const [token, setToken] = useState(() => { // State variable to store the token
-		return localStorage.getItem('tokenId') || null; // Retrieve the token from localStorage or set it to null if not present
-	});
-	const [email, setEmail] = useState(() => { // State variable to store the email
-		if (localStorage.getItem('userEmail')) {
-			return localStorage.getItem('userEmail'); // Retrieve the email from localStorage
-		} else {
-			return ''; // Set the email to an empty string if not present in localStorage
-		}
-	});
-	const login = (token, email) => { // Function to handle the login action
-		setToken(token); // Set the token
-		setEmail(email);  // Set the email
-		setIsLoggedIn(true);	// Set isLoggedIn to true
+
+	const [showLogout, setShowLogout] = useState(false);
+
+	const login = (token, user) => {
+		localStorage.setItem('tokenId', token);
+		localStorage.setItem('user', JSON.stringify(user));
+		setToken(token);
+		setIsLoggedIn(true);
+	};
+
+	const logout = () => {
+		setToken(null);
+		setIsLoggedIn(false);
+		setShowLogout(false);
+		localStorage.removeItem('tokenId');
+		localStorage.removeItem('user');
 	};
 
 	let bartValue = {
-		logout: logout,
-		setShowLogout: setShowLogout,
 		token: token,
 		isLoggedIn: isLoggedIn,
-		email: email,
+		login: login,
+		user: user,
+		setUser: updateUser,
+		data: data,
+		setData: setData,
+		logout: logout,
 		showLogout: showLogout,
-		login:login
+		setShowLogout: setShowLogout
 	};
-	
-    
-    return <BartContext.Provider value={bartValue}>{props.children}</BartContext.Provider>;
+	return <BartContext.Provider value={bartValue}>{props.children}</BartContext.Provider>;
 };
+
 export default BartProvider;
