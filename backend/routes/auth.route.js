@@ -54,7 +54,7 @@ authRouter.post('/login', async (req, res) => {
 		}
 
 		if (!result) {
-			return res.status(401).json({ error: { message: 'Invalid credentials' } });
+			return res.status(401).json({ error: { message: 'Wrong Email or Password' } });
 		}
 
 		// Generate a JWT token
