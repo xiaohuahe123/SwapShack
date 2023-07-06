@@ -21,7 +21,7 @@ app.use('/api', routes);
 
 //GET user info
 app.get('/', async (req, res) => {
-	const snapshot = await User.get();
+	const snapshot = await Users.get();
 	const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 	res.send(list);
 });
@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
 //CREATE new users
 app.post('/create', async (req, res) => {
 	const data = req.body;
-	await Users.add({ data });
+	await Users.add(data);
 	res.send({ msg: 'User Added' }); 
 });
 

@@ -61,11 +61,11 @@ profileRouter.put('/:id', authenticateToken, async (req, res) => {
 
 		await profileRef.update(profileData, { merge: true });
 		const updatedProfile = await profileRef.get();
-
-		delete updatedProfile.password;
-		res.json({ id: updatedProfile.id, ...updatedProfile.data() });
+		let temp = updatedProfile.data();
+		delete temp.password;
+		res.json({ id: updatedProfile.id, ...temp });
 	} catch (error) {
-		res.status(500).json({ error: 'Failed to update profile' });
+		res.status(500).json({ error: { message: 'Failed to update profile' } });
 	}
 });
 

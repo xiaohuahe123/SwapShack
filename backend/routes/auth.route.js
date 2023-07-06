@@ -29,7 +29,7 @@ authRouter.post('/signup', async (req, res) => {
 		// Store the user in Firestore
 		await Users.doc(userId).set({ id: userId, email, password: hashedPassword });
 
-		res.status(201).json({ message: 'User registered successfully' });
+		res.status(201).json({ error: { message: 'User registered successfully' } });
 	});
 });
 
@@ -66,7 +66,7 @@ authRouter.post('/login', async (req, res) => {
 
 // Private API endpoint
 authRouter.get('/private', authenticateToken, (req, res) => {
-	res.status(200).json({ message: 'Private API accessed successfully' });
+	res.status(200).json({ error: { message: 'Private API accessed successfully' } });
 });
 
 module.exports = authRouter;

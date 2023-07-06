@@ -36,7 +36,7 @@ const SignUp = () => {
 			};
 
 			// Make a POST request to the signup endpoint using axios
-			const response = await axios.post('http://localhost:4000/signup', data, {
+			const response = await axios.post('http://localhost:4000/signup', { email, password }, {
 				headers: { 'Content-Type': 'application/json' }
 			});
 
