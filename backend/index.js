@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = 4000
+const PORT = 4000;
 
 // Serve static files from the 'frontend/build' directory
 app.use(express.static(path.join(__dirname,"..", 'frontend', 'build')));
