@@ -20,6 +20,25 @@ profileRouter.get('/', async (req, res) => {
 	}
 });
 
+// Fetch a specific profile
+profileRouter.get('/:id', authenticateToken, async (req, res) => {
+	try {
+		const profileId = req.params.id;
+		const profileRef = Users.doc(profileId);
+		const profile = await profileRef.get();
+
+		if (!profile.exists) {
+			res.status(404).json({ error: { message: 'Profile not found' } });
+		} else {
+			let temp = profile.data();
+			delete temp.password;
+			res.json({ id: profile.id, ...temp });
+		}
+	} catch (error) {
+		res.status(500).json({ error: { message: 'Failed to fetch profile' } });
+	}
+});
+
 // Create a new profile
 profileRouter.post('/', authenticateToken, async (req, res) => {
 	try {
