@@ -14,7 +14,7 @@ root.render(
 
   //BrowserRouter: to enable routing functionality for the entire application.
   //React.StrictMode: to perform additional runtime checks and warnings during development.
-  <BrowserRouter> 
+  <BrowserRouter>
     <React.StrictMode>
       <App />
     </React.StrictMode>
