@@ -71,6 +71,7 @@ const Profile = () => {
 
 			if (response && response.error) alert(response.error);
 			if (response && response.data) setUser(response.data);
+			alert('update profile successful');
 		} catch (err) {
 			console.log(err);
 			alert(err);
