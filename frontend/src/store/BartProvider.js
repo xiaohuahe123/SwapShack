@@ -10,14 +10,16 @@ import React, { useState } from 'react';
 import BartContext from './bartContext';
 
 const BartProvider = (props) => {
-	
-    const [showLogout, setShowLogout] = useState(false);
-    const logout = () => {
-		setToken(null);
-		setIsLoggedIn(false);
-		setShowLogout(false);
-		localStorage.removeItem('tokenId');
-		localStorage.removeItem('user');
+	const [token, setToken] = useState(() => {
+		return localStorage.getItem('tokenId') || null;
+	});
+	const [user, setUser] = useState(() => {
+		const u = localStorage.getItem('user');
+		return u ? JSON.parse(u) : {};
+	});
+
+	const updateUser = (user) => {
+		localStorage.setItem('user', JSON.stringify(user));
 	};
 
 	const [data, setData] = useState([]);
@@ -28,17 +30,12 @@ const BartProvider = (props) => {
 			return false;
 		}
 	});
-	const [token, setToken] = useState(() => {
-		return localStorage.getItem('tokenId') || null;
-	});
-	const [email, setEmail] = useState(() => {
-		if (localStorage.getItem('userEmail')) {
-			return localStorage.getItem('userEmail');
-		} else {
-			return '';
-		}
-	});
-	const login = (token, email) => {
+
+	const [showLogout, setShowLogout] = useState(false);
+
+	const login = (token, user) => {
+		localStorage.setItem('tokenId', token);
+		localStorage.setItem('user', JSON.stringify(user));
 		setToken(token);
 		setIsLoggedIn(true);
 	};
@@ -54,9 +51,14 @@ const BartProvider = (props) => {
 	let bartValue = {
 		token: token,
 		isLoggedIn: isLoggedIn,
-		email: email,
+		login: login,
+		user: user,
+		setUser: updateUser,
+		data: data,
+		setData: setData,
+		logout: logout,
 		showLogout: showLogout,
-		login:login
+		setShowLogout: setShowLogout
 	};
 	return <BartContext.Provider value={bartValue}>{props.children}</BartContext.Provider>;
 };
