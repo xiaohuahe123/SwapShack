@@ -10,21 +10,7 @@ import React, { useState } from 'react';
 import BartContext from './bartContext';
 
 const BartProvider = (props) => {
-	const [token, setToken] = useState(() => {
-		return localStorage.getItem('tokenId') || null;
-	});
 	
-	const [headers, setHeaders] = useState(() => {
-		return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
-	});
-	const [user, setUser] = useState(() => {
-		const u = localStorage.getItem('user');
-		return u ? JSON.parse(u) : {};
-	});
-
-	const updateUser = (user) => {
-		localStorage.setItem('user', JSON.stringify(user));
-	};
     const [showLogout, setShowLogout] = useState(false);
     const logout = () => {
 		setToken(null);
@@ -33,7 +19,8 @@ const BartProvider = (props) => {
 		localStorage.removeItem('tokenId');
 		localStorage.removeItem('user');
 	};
-    
+
+	const [data, setData] = useState([]);
 	const [isLoggedIn, setIsLoggedIn] = useState(() => {
 		if (localStorage.getItem('tokenId')) {
 			return true;
@@ -41,27 +28,37 @@ const BartProvider = (props) => {
 			return false;
 		}
 	});
-	
-	const login = (token, user) => {
-		localStorage.setItem('tokenId', token);
-		localStorage.setItem('user', JSON.stringify(user));
+	const [token, setToken] = useState(() => {
+		return localStorage.getItem('tokenId') || null;
+	});
+	const [email, setEmail] = useState(() => {
+		if (localStorage.getItem('userEmail')) {
+			return localStorage.getItem('userEmail');
+		} else {
+			return '';
+		}
+	});
+	const login = (token, email) => {
 		setToken(token);
 		setIsLoggedIn(true);
 	};
 
+	const logout = () => {
+		setToken(null);
+		setIsLoggedIn(false);
+		setShowLogout(false);
+		localStorage.removeItem('tokenId');
+		localStorage.removeItem('user');
+	};
+
 	let bartValue = {
-		logout: logout,
-		setShowLogout: setShowLogout,
 		token: token,
 		isLoggedIn: isLoggedIn,
+		email: email,
 		showLogout: showLogout,
-		login:login,
-		headers,
-		user: user,
-		setUser: updateUser
+		login:login
 	};
-	
-    
-    return <BartContext.Provider value={bartValue}>{props.children}</BartContext.Provider>;
+	return <BartContext.Provider value={bartValue}>{props.children}</BartContext.Provider>;
 };
+
 export default BartProvider;

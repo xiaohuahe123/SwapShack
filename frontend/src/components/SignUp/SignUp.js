@@ -4,12 +4,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import BartContext from '../../store/bartContext';
 import SubSection from '../SubSection/SubSection';
 import './SignUp.css';
+
 const SignUp = () => {
+	// State variables to store the email and password
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	// useNavigate hook from react-router-dom to handle navigation
 	const navigate = useNavigate();
+
+	// Extract isLoggedIn from the BartContext using the useContext hook
 	const { isLoggedIn } = useContext(BartContext);
+
 	useEffect(() => {
+		// Redirect the user to the home page if already logged in
 		if (isLoggedIn === true) {
 			navigate('/home');
 		}
@@ -17,14 +25,18 @@ const SignUp = () => {
 	const handleSignUp = async (e) => {
 		e.preventDefault();
 		try {
+			// Prepare the request payload
 			const data = {
 				email: email,
 				password: password,
 				returnSecureToken: true
 			};
+
+				// Send a POST request to the server to sign up the user
 			const response = await axios.post('/auth/signup',{ email, password }, {
 				headers: { 'Content-Type': 'application/json' }
 			});
+			
 			if (response && response.error) alert(response.error);
 			if (response && response.data.message) navigate('/');
 		} catch (err) {

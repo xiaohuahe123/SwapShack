@@ -7,20 +7,34 @@ import './Profile.css';
 import api from '../../restClient/api';
 
 const Profile = () => {
+	// Extract necessary data from the BartContext using the useContext hook
 	const { isLoggedIn, user, token, setUser } = useContext(BartContext);
+
+	// State variables to manage the profile data
 	const [profile, setProfile] = useState(user);
+
+	// useNavigate hook from react-router-dom to handle navigation
 	const navigate = useNavigate();
+	
 	useEffect(function () {
+		// Check if the user is logged in
 		if (isLoggedIn !== true) {
+
+			// Redirect the user to the login page if not logged in
 			return navigate('/login');
 		}
+
+		// Set up the headers for the API request
 		const headers = {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`
 		};
 		try {
+			// Fetch the user's profile data from the server using the API
 			api.get(`/profile/${user.id}`, { headers }).then((res) => {
 				if (res.data) {
+
+						// Update both the user and profile states with the fetched data
 					setUser(res.data);
 					setProfile(res.data);
 				}
@@ -32,6 +46,8 @@ const Profile = () => {
 	}, []);
 
 	const handleInputChange = (event) => {
+
+		// Destructure the name and value from the input event target
 		const { name, value } = event.target;
 
 		// Update the state by merging the updated value with the existing state
@@ -43,11 +59,16 @@ const Profile = () => {
 	const handleProfileUpdate = async (e) => {
 		e.preventDefault();
 		try {
+
+			// Set up the headers for the API request
 			const headers = {
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${token}`
 			};
+
+			// Send a PUT request to update the user's profile data
 			const response = await api.put(`/profile/${user.id}`, profile, { headers });
+
 			if (response && response.error) alert(response.error);
 			if (response && response.data) setUser(response.data);
 		} catch (err) {
