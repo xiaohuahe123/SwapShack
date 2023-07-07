@@ -38,6 +38,7 @@ const SignUp = () => {
 			});
 			
 			if (response && response.error) alert(response.error);
+			alert('Sign up successful');
 			if (response && response.data.message) navigate('/');
 		} catch (err) {
 			console.log(err);
