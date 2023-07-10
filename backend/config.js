@@ -18,9 +18,11 @@ firebase.initializeApp(firebaseConfig);
 // Get the Firestore database instance
 const db = firebase.firestore();
 
-// Create a reference to the 'Users', 'Posts' collection in the database
+// Create a reference to the 'Users', 'Posts', 'Countries', 'Categories' collection in the database
 const Users = db.collection('Users');
 const Posts = db.collection('Posts');
+const Countries = db.collection('Countries');
+const Categories = db.collection('Categories');
 
-// Export the ‘firebase’, 'User' collection reference to be used in other parts of the code
-module.exports = { firebase, Users, Posts };
+// Export the ‘firebase’, 'User', 'Posts', 'Countries', 'Categories' collection reference to be used in other parts of the code
+module.exports = { firebase, Users, Posts, Countries, Categories };
