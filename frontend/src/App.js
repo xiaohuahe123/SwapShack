@@ -9,6 +9,7 @@ import Profile from './components/Profile/Profile';
 //fetch data asynchronously using the React.lazy Inside the Suspense boundary
 const Login = React.lazy(() => import('./components/Login/Login'));
 const SignUp = React.lazy(() => import('./components/SignUp/SignUp'));
+const AdminComponent = React.lazy(() => import('./components/Admin/Admin'));
 function App() {
 	const [isMove, setIsMove] = useState(false);
 
@@ -23,7 +24,7 @@ function App() {
 				<div className="app">
 					<Header setIsPane={setIsMove} />
 					<Routes>
-						<Route path="/" element={<Login />} />
+						<Route path="/" element={<AdminComponent />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/sign-up" element={<SignUp />} />
 						<Route path="/profile" element={<Profile />} />
