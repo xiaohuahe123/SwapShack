@@ -16,3 +16,20 @@
     margin-bottom: 5px;
   }
   
+  .dropdown {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .dropdown:disabled {
+    opacity: 0.5;
+  }
+  
+  .dropdown option {
+    font-size: 14px;
+  }
+  
