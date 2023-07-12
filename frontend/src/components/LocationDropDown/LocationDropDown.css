@@ -1,0 +1,35 @@
+.location-dropdown-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .location-dropdown {
+    margin-bottom: 10px;
+  }
+  
+  .category-dropdown {
+    margin-top: 10px;
+  }
+  
+  .label {
+    margin-bottom: 5px;
+  }
+  
+  .dropdown {
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    outline: none;
+  }
+  
+  .dropdown:disabled {
+    opacity: 0.5;
+  }
+  
+  .dropdown option {
+    font-size: 14px;
+  }
+  

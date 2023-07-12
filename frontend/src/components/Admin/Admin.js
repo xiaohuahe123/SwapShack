@@ -1,6 +1,14 @@
 import React, {useEffect,useState} from "react";
 import CategoryComponent from '../CategoryComponent/CategoryComponent';
 
+import {
+	fetchCountries,
+	
+	updateCountry,
+	
+	createCountry,
+	
+} from '../../restClient/api';
 const AdminPage = () => {
 	const [selectedType, setSelectedType] = useState('');
 	const [countries, setCountries] = useState([]);
@@ -9,53 +17,42 @@ const AdminPage = () => {
 	const [selectedState, setSelectedState] = useState(null);
 	const [cities, setCities] = useState([]);
 	const [selectedCity, setSelectedCity] = useState(null);
+	const [categories, setCategories] = useState([]);
+	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [subCategories, setSubCategories] = useState([]);
+	const [selectedSubCategory, setSelectedSubCategory] = useState(null);
     
 	useEffect(() => {
-		fetchCountries();
+		getCountries();
 	}, []);
-	const createCountry = async (countryName) => {
-		try {
-			const response = await fetch('/location', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({ name: countryName })
-			});
 
-			const newCountry = await response.json();
-			setCountries((prevCountries) => [...prevCountries, newCountry]);
-		} catch (error) {
-			console.error('Error creating country:', error);
-		}
+	const getCountries = async () => {
+		const countriesData = await fetchCountries();
+		setCountries(countriesData);
 	};
-	const updateCountry = async (updatedCountry) => {
+	const updateCountryData = async (updatedCountry) => {
 		try {
-			await fetch(`/location/${updatedCountry.id}`, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(updatedCountry)
-			});
+			await updateCountry(updatedCountry);
 
 			// Optionally, you can refetch the countries data after updating
-			fetchCountries();
+			const countriesData = await fetchCountries();
+			setCountries(countriesData);
 		} catch (error) {
 			console.error('Error updating country:', error);
 		}
 	};
-	const fetchCountries = async () => {
-		try {
-			const response = await fetch('/location');
-			const countriesData = await response.json();
-			setCountries(countriesData);
-		} catch (error) {
-			console.error('Error fetching countries:', error);
-		}
-	};
+
 	const clearCountrySelection = () => {
 		setSelectedCountry(null);
+	};
+
+	const createCountryData = async (countryName) => {
+		try {
+			const newCountry = await createCountry(countryName);
+			setCountries((prevCountries) => [...prevCountries, newCountry]);
+		} catch (error) {
+			console.error('Error creating country:', error);
+		}
 	};
 
 
@@ -74,14 +71,14 @@ const AdminPage = () => {
 			{selectedType === 'Location' && (
 				<div style={{ display: 'flex' }}>
 					<CategoryComponent
-						collectionName="countries"
-						itemNameField="name"
-						items={countries}
-						selectedItem={selectedCountry}
-						selectItem={setSelectedCountry}
-						updateItem={updateCountry}
-						createItem={createCountry}
-						clearSelection={clearCountrySelection}
+							collectionName="countries"
+							itemNameField="name"
+							items={countries}
+							selectedItem={selectedCountry}
+							selectItem={setSelectedCountry}
+							updateItem={updateCountryData}
+							createItem={createCountryData}
+							clearSelection={clearCountrySelection}
 					/>
 				</div>
 				)}
@@ -98,6 +95,32 @@ const AdminPage = () => {
 						createItem={createCountry}
 						clearSelection={clearCountrySelection}
 					/>
+				{/* {selectedCountry && (
+						<CategoryComponent
+							collectionName="states"
+							itemNameField="name"
+							items={states}
+							selectedItem={selectedState}
+							selectItem={setSelectedState}
+							updateItem={updateState}
+							createItem={createState}
+							clearSelection={clearStateSelection}
+						/>
+				)}
+
+				{selectedState && (
+						<CategoryComponent
+							collectionName="cities"
+							itemNameField="name"
+							items={cities}
+							selectedItem={selectedCity}
+							selectItem={setSelectedCity}
+							updateItem={updateCity}
+							createItem={createCity}
+							clearSelection={clearCitySelection}
+						/>
+				)}
+			 */}
 			</div>}
         </div>
 		
