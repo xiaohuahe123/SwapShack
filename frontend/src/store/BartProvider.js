@@ -1,17 +1,13 @@
-/*
-Author:XiaohuaHe
-Function:
-BartProvider component is a custom context provider that wraps the entire application.
-It provides the context and state management for the BartContext.By wrapping the entire application
- with the BartProvider component in the App.js file, data and functionality provided by the BartProvider available 
- to all components within the application.
-*/
 import React, { useState } from 'react';
 import BartContext from './bartContext';
+import { updateInstanceToken } from '../restClient/api';
 
 const BartProvider = (props) => {
 	const [token, setToken] = useState(() => {
 		return localStorage.getItem('tokenId') || null;
+	});
+	const [headers, setHeaders] = useState(() => {
+		return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` };
 	});
 	const [user, setUser] = useState(() => {
 		const u = localStorage.getItem('user');
@@ -20,6 +16,7 @@ const BartProvider = (props) => {
 
 	const updateUser = (user) => {
 		localStorage.setItem('user', JSON.stringify(user));
+		setUser({ ...user });
 	};
 
 	const [data, setData] = useState([]);
@@ -35,8 +32,9 @@ const BartProvider = (props) => {
 
 	const login = (token, user) => {
 		localStorage.setItem('tokenId', token);
-		localStorage.setItem('user', JSON.stringify(user));
 		setToken(token);
+		updateInstanceToken(token);
+		updateUser(user)
 		setIsLoggedIn(true);
 	};
 
@@ -46,10 +44,13 @@ const BartProvider = (props) => {
 		setShowLogout(false);
 		localStorage.removeItem('tokenId');
 		localStorage.removeItem('user');
+		setUser({});
+		setToken(null);
 	};
 
 	let bartValue = {
 		token: token,
+		headers,
 		isLoggedIn: isLoggedIn,
 		login: login,
 		user: user,
