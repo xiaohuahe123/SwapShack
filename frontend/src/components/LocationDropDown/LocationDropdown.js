@@ -93,3 +93,59 @@ const LocationDropdown = ({ onSelectionChange, selectedCountryId, selectedStateI
 			console.error('Error fetching subcategories:', error);
 		}
 	};
+
+    const handleCountryChange = async (e) => {
+		const selectedCountry = e.target.value;
+		setSelectedCountry(selectedCountry);
+		setSelectedState('');
+		setSelectedCity('');
+		setSelectedCategory('');
+		setSelectedSubCategory('');
+
+		if (selectedCountry) {
+			await getStates(selectedCountry);
+		}
+
+		const selection = {
+			countryId: selectedCountry,
+			stateId: '',
+			cityId: ''
+		};
+
+		onSelectionChange(selection);
+	};
+
+    const handleStateChange = async (e) => {
+		const selectedState = e.target.value;
+		setSelectedState(selectedState);
+		setSelectedCity('');
+		setSelectedCategory('');
+		setSelectedSubCategory('');
+
+		if (selectedState) {
+			await getCities(selectedState);
+		}
+
+		const selection = {
+			countryId: selectedCountry,
+			stateId: selectedState,
+			cityId: ''
+		};
+
+		onSelectionChange(selection);
+	};
+
+	const handleCityChange = (e) => {
+		const selectedCity = e.target.value;
+		setSelectedCity(selectedCity);
+		setSelectedCategory('');
+		setSelectedSubCategory('');
+
+		const selection = {
+			countryId: selectedCountry,
+			stateId: selectedState,
+			cityId: selectedCity
+		};
+
+		onSelectionChange(selection);
+	};
