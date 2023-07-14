@@ -5,7 +5,7 @@ import { getPostById } from '../../restClient/api';
 // import LocationDropdown from './LocationDropdown';
 
 const CreatePost = ({ id, createPost, editPost }) => {
-	const isEditMode = !!id; // Check if an id prop is provided
+	const isEditMode = !!id; 
 	const [post, setPost] = useState({
 		name: '',
 		description: '',
