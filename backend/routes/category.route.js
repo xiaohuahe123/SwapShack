@@ -64,4 +64,35 @@ categoryRouter.post('/:categoryId/subCategories', async (req, res) => {
 	}
 });
 
+// Create a route to update a category
+categoryRouter.put('/:categoryId', async (req, res) => {
+	try {
+		const categoryId = req.params.categoryId;
+		const { name } = req.body;
+
+		await Categories.doc(categoryId).update({ name });
+
+		res.json({ success: true });
+	} catch (error) {
+		console.error('Error updating category:', error);
+		res.status(500).json({ error: 'Error updating category' });
+	}
+});
+
+// Create a route to update a subCategory
+categoryRouter.put('/:categoryId/subCategories/:subCategoryId', async (req, res) => {
+	try {
+		const categoryId = req.params.categoryId;
+		const subCategoryId = req.params.subCategoryId;
+		const { name } = req.body;
+
+		await Categories.doc(categoryId).collection('subCategories').doc(subCategoryId).update({ name });
+
+		res.json({ success: true });
+	} catch (error) {
+		console.error('Error updating subCategory:', error);
+		res.status(500).json({ error: 'Error updating subCategory' });
+	}
+});
+
 module.exports = categoryRouter;
