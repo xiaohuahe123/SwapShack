@@ -39,4 +39,47 @@
   .profile__link:hover {
     text-decoration: underline;
   }
- 
+  @media only screen and (max-width: 600px) {
+    .profile__input {
+      width: 300px;
+    }
+  }
+  @media only screen and (max-width: 300px) {
+    .profile__subContainer {
+      margin-left: 40px;
+    }
+  }
+  
+  .create-post {
+    margin-top: 20px;
+  }
+  
+  .create-post__title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .create-post__input,
+  .create-post__textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  .create-post__textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .create-post__button {
+    background-color: #4285f4;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
