@@ -84,4 +84,12 @@ const LocationDropdown = ({ onSelectionChange, selectedCountryId, selectedStateI
 		}
 	};
 
-	
+    const getSubCategories = async (category) => {
+		if (isEmpty(category)) return;
+		try {
+			const subCategoriesData = await fetchSubCategories(category);
+			setSubCategories(subCategoriesData);
+		} catch (error) {
+			console.error('Error fetching subcategories:', error);
+		}
+	};
