@@ -3,10 +3,16 @@ import CategoryComponent from '../CategoryComponent/CategoryComponent';
 
 import {
 	fetchCountries,
+	fetchStates,
+	fetchCities,
 	
 	updateCountry,
-	
+	updateState,
+	updateCity,
+
 	createCountry,
+	createState,
+	createCity
 	
 } from '../../restClient/api';
 const AdminPage = () => {
@@ -26,10 +32,32 @@ const AdminPage = () => {
 		getCountries();
 	}, []);
 
+	// whenever the selectedCountry value is updated, the getStates is triggered
+	useEffect(() => {
+		getStates();
+	}, [selectedCountry]);
+
+	useEffect(() => {
+		getCities();
+	}, [selectedState]);
+
 	const getCountries = async () => {
 		const countriesData = await fetchCountries();
 		setCountries(countriesData);
 	};
+	const getCities = async () => {
+		if (!selectedState) return setCities([]);
+
+		const citiesData = await fetchCities(selectedCountry.id, selectedState.id);
+		setCities(citiesData);
+	};
+	const getStates = async () => {
+		if (!selectedCountry) return setStates([]);
+
+		const statesData = await fetchStates(selectedCountry.id);
+		setStates(statesData);
+	};
+
 	const updateCountryData = async (updatedCountry) => {
 		try {
 			await updateCountry(updatedCountry);
@@ -46,12 +74,62 @@ const AdminPage = () => {
 		setSelectedCountry(null);
 	};
 
+	const updateStateData = async (updatedState) => {
+		try {
+			await updateState(selectedCountry.id, updatedState);
+
+			// Optionally, you can refetch the states data after updating
+			const statesData = await fetchStates(selectedCountry.id);
+			setStates(statesData);
+		} catch (error) {
+			console.error('Error updating state:', error);
+		}
+	};
+
+	const clearStateSelection = () => {
+		setSelectedState(null);
+	};
+
+	const updateCityData = async (updatedCity) => {
+		try {
+			await updateCity(selectedCountry.id, selectedState.id, updatedCity);
+
+			// Optionally, you can refetch the cities data after updating
+			const citiesData = await fetchCities(selectedCountry.id, selectedState.id);
+			setCities(citiesData);
+		} catch (error) {
+			console.error('Error updating city:', error);
+		}
+	};
+
+	const clearCitySelection = () => {
+		setSelectedCity(null);
+	};
+
 	const createCountryData = async (countryName) => {
 		try {
 			const newCountry = await createCountry(countryName);
 			setCountries((prevCountries) => [...prevCountries, newCountry]);
 		} catch (error) {
 			console.error('Error creating country:', error);
+		}
+	};
+
+	const createStateData = async (stateName) => {
+		try {
+			const newState = await createState(selectedCountry.id, stateName);
+			setStates((prevStates) => [...prevStates, newState]);
+		} catch (error) {
+			console.error('Error creating state:', error);
+		}
+	};
+
+	const createCityData = async (cityName) => {
+		try {
+			const newCity = await createCity(selectedCountry.id, selectedState.id, cityName);
+			setCities((prevCities) => [...prevCities, newCity]);
+		} catch (error) {
+			console.error('Error creating city:', error);
 		}
 	};
 
@@ -80,8 +158,33 @@ const AdminPage = () => {
 							createItem={createCountryData}
 							clearSelection={clearCountrySelection}
 					/>
+				{selectedCountry && (
+						<CategoryComponent
+							collectionName="states"
+							itemNameField="name"
+							items={states}
+							selectedItem={selectedState}
+							selectItem={setSelectedState}
+							updateItem={updateStateData}
+							createItem={createStateData}
+							clearSelection={clearStateSelection}
+						/>
+					)}
+
+					{selectedState && (
+						<CategoryComponent
+							collectionName="cities"
+							itemNameField="name"
+							items={cities}
+							selectedItem={selectedCity}
+							selectItem={setSelectedCity}
+							updateItem={updateCityData}
+							createItem={createCityData}
+							clearSelection={clearCitySelection}
+						/>
+					)}
 				</div>
-				)}
+			)}
 
 			{selectedType === 'Category' && 
 			<div style={{ display: 'flex' }}>
@@ -95,32 +198,7 @@ const AdminPage = () => {
 						createItem={createCountry}
 						clearSelection={clearCountrySelection}
 					/>
-				{/* {selectedCountry && (
-						<CategoryComponent
-							collectionName="states"
-							itemNameField="name"
-							items={states}
-							selectedItem={selectedState}
-							selectItem={setSelectedState}
-							updateItem={updateState}
-							createItem={createState}
-							clearSelection={clearStateSelection}
-						/>
-				)}
-
-				{selectedState && (
-						<CategoryComponent
-							collectionName="cities"
-							itemNameField="name"
-							items={cities}
-							selectedItem={selectedCity}
-							selectItem={setSelectedCity}
-							updateItem={updateCity}
-							createItem={createCity}
-							clearSelection={clearCitySelection}
-						/>
-				)}
-			 */}
+				
 			</div>}
         </div>
 		
