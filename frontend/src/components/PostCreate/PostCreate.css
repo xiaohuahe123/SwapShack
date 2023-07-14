@@ -1,0 +1,42 @@
+.profile__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
+  }
+  .profile__input {
+    display: flex;
+    width: 500px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid lightgray;
+  }
+  .profile__subTitle {
+    color: #444444;
+    font-size: 13px;
+  }
+  .profile__inputContainer {
+    margin-bottom: 30px;
+  }
+  .profile__button {
+    background-color: #3bd480;
+    border-color: #3bc4d4;
+    color: white;
+    width: 130px;
+    height: 50px;
+    border: 1px solid;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: auto;
+  }
+  .profile__button:hover {
+    background-color: black;
+    color: white;
+  }
+  .profile__link {
+    padding-top: 10px;
+  }
+  .profile__link:hover {
+    text-decoration: underline;
+  }
+ 
