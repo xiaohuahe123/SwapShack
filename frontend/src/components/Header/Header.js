@@ -31,6 +31,15 @@ const Header = ({ setIsPane }) => {
 								</p>
 							</NavLink>
 						</div>
+						{user.email === ADMIN_EMAIL && (
+							<div className="header__singleLink">
+								<NavLink style={{ textDecoration: 'none' }} to="/admin">
+									<p className="header__singleLinkText" style={{ fontFamily: 'Montserrat' }}>
+										Admin
+									</p>
+								</NavLink>
+							</div>
+						)}
 						<div className="header__icons">
 							<div className="header__singleIcon">
 								<NavLink to="/profile">
