@@ -149,3 +149,107 @@ const LocationDropdown = ({ onSelectionChange, selectedCountryId, selectedStateI
 
 		onSelectionChange(selection);
 	};
+
+    const handleCategoryChange = async (e) => {
+		const selectedCategory = e.target.value;
+		setSelectedCategory(selectedCategory);
+		setSelectedSubCategory('');
+
+		if (selectedCategory) {
+			await getSubCategories(selectedCategory);
+		}
+
+		const selection = {
+			categoryId: selectedCategory,
+			subCategoryId: ''
+		};
+
+		onSelectionChange(selection);
+	};
+
+	const handleSubCategoryChange = (e) => {
+		const selectedSubCategory = e.target.value;
+		setSelectedSubCategory(selectedSubCategory);
+
+		const selection = {
+			categoryId: selectedCategory,
+			subCategoryId: selectedSubCategory
+		};
+
+		onSelectionChange(selection);
+	};
+
+	return (
+		<div className="location-dropdown-container">
+			{type === LOCATION && (
+				<div className="location-dropdown">
+					<label htmlFor="country" className="label">
+						Country:
+					</label>
+					<select id="country" className="dropdown" value={selectedCountry} onChange={handleCountryChange}>
+						<option value="">Select Country</option>
+						{countries.map((country) => (
+							<option key={country.id} value={country.id}>
+								{country.name}
+							</option>
+						))}
+					</select>
+
+					<label htmlFor="state" className="label">
+						State:
+					</label>
+					<select id="state" className="dropdown" value={selectedState} onChange={handleStateChange} disabled={!selectedCountry}>
+						<option value="">Select State</option>
+						{states.map((state) => (
+							<option key={state.id} value={state.id}>
+								{state.name}
+							</option>
+						))}
+					</select>
+
+					<label htmlFor="city" className="label">
+						City:
+					</label>
+					<select id="city" className="dropdown" value={selectedCity} onChange={handleCityChange} disabled={!selectedState}>
+						<option value="">Select City</option>
+						{cities.map((city) => (
+							<option key={city.id} value={city.id}>
+								{city.name}
+							</option>
+						))}
+					</select>
+				</div>
+			)}
+
+			{type === CATEGORY && (
+				<div className="category-dropdown">
+					<label htmlFor="category" className="label">
+						Category:
+					</label>
+					<select id="category" className="dropdown" value={selectedCategory} onChange={handleCategoryChange}>
+						<option value="">Select Category</option>
+						{categories.map((category) => (
+							<option key={category.id} value={category.id}>
+								{category.name}
+							</option>
+						))}
+					</select>
+
+					<label htmlFor="subcategory" className="label">
+						Subcategory:
+					</label>
+					<select id="subcategory" className="dropdown" value={selectedSubCategory} onChange={handleSubCategoryChange} disabled={!selectedCategory}>
+						<option value="">Select Subcategory</option>
+						{subCategories.map((subCategory) => (
+							<option key={subCategory.id} value={subCategory.id}>
+								{subCategory.name}
+							</option>
+						))}
+					</select>
+				</div>
+			)}
+		</div>
+	);
+};
+
+export default LocationDropdown;
