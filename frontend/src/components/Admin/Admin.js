@@ -1,20 +1,22 @@
-import React, {useEffect,useState} from "react";
+import React, { useEffect, useState } from 'react';
 import CategoryComponent from '../CategoryComponent/CategoryComponent';
-
 import {
 	fetchCountries,
 	fetchStates,
 	fetchCities,
-	
+	fetchCategories,
+	fetchSubCategories,
 	updateCountry,
 	updateState,
 	updateCity,
-
+	updateSubCategory,
 	createCountry,
 	createState,
-	createCity
-	
+	createCity,
+	createCategory,
+	createSubCategory
 } from '../../restClient/api';
+
 const AdminPage = () => {
 	const [selectedType, setSelectedType] = useState('');
 	const [countries, setCountries] = useState([]);
@@ -27,8 +29,10 @@ const AdminPage = () => {
 	const [selectedCategory, setSelectedCategory] = useState(null);
 	const [subCategories, setSubCategories] = useState([]);
 	const [selectedSubCategory, setSelectedSubCategory] = useState(null);
-    
+
+	 // fetch countries and categories one time
 	useEffect(() => {
+		getCategories();
 		getCountries();
 	}, []);
 
@@ -41,10 +45,16 @@ const AdminPage = () => {
 		getCities();
 	}, [selectedState]);
 
+	useEffect(() => {
+		getSubCategories();
+	}, [selectedCategory]);
+	
+
 	const getCountries = async () => {
 		const countriesData = await fetchCountries();
 		setCountries(countriesData);
 	};
+
 	const getCities = async () => {
 		if (!selectedState) return setCities([]);
 
@@ -52,10 +62,23 @@ const AdminPage = () => {
 		setCities(citiesData);
 	};
 	const getStates = async () => {
+		console.log('getStates called')
 		if (!selectedCountry) return setStates([]);
-
+		console.log(selectedCountry);
 		const statesData = await fetchStates(selectedCountry.id);
 		setStates(statesData);
+	};
+
+	const getSubCategories = async () => {
+		if (!selectedCategory) return setSubCategories([]);
+
+		const subCategoriesData = await fetchSubCategories(selectedCategory.id);
+		setSubCategories(subCategoriesData);
+	};
+
+	const getCategories = async () => {
+		const categoriesData = await fetchCategories();
+		setCategories(categoriesData);
 	};
 
 	const updateCountryData = async (updatedCountry) => {
@@ -106,6 +129,39 @@ const AdminPage = () => {
 		setSelectedCity(null);
 	};
 
+	const updateSubCategoryData = async (updatedSubCategory) => {
+		try {
+			await updateSubCategory(selectedCategory.id, updatedSubCategory);
+
+			// Optionally, you can refetch the subcategories data after updating
+			const subCategoriesData = await fetchSubCategories(selectedCategory.id);
+			setSubCategories(subCategoriesData);
+		} catch (error) {
+			console.error('Error updating subcategory:', error);
+		}
+	};
+
+	const clearSubCategorySelection = () => {
+		setSelectedSubCategory(null);
+	};
+
+	const updateCategoryData = async (updatedCategory) => {
+		try {
+			await updateCountry(updatedCategory);
+
+			// Optionally, you can refetch the categories data after updating
+			const categoriesData = await fetchCategories();
+			setCategories(categoriesData);
+		} catch (error) {
+			console.error('Error updating category:', error);
+		}
+	};
+
+	const clearCategorySelection = () => {
+		setSelectedCategory(null);
+	};
+   
+	//
 	const createCountryData = async (countryName) => {
 		try {
 			const newCountry = await createCountry(countryName);
@@ -133,9 +189,26 @@ const AdminPage = () => {
 		}
 	};
 
+	const createCategoryData = async (categoryName) => {
+		try {
+			const newCategory = await createCategory(categoryName);
+			setCategories((prevCategories) => [...prevCategories, newCategory]);
+		} catch (error) {
+			console.error('Error creating category:', error);
+		}
+	};
 
-    return(
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+	const createSubCategoryData = async (subCategoryName) => {
+		try {
+			const newSubCategory = await createSubCategory(selectedCategory.id, subCategoryName);
+			setSubCategories((prevSubCategories) => [...prevSubCategories, newSubCategory]);
+		} catch (error) {
+			console.error('Error creating subcategory:', error);
+		}
+	};
+
+	return (
+		<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 			<h4>Select Type:</h4>
 			<select value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
 				<option value="">Select Type</option>
@@ -149,16 +222,17 @@ const AdminPage = () => {
 			{selectedType === 'Location' && (
 				<div style={{ display: 'flex' }}>
 					<CategoryComponent
-							collectionName="countries"
-							itemNameField="name"
-							items={countries}
-							selectedItem={selectedCountry}
-							selectItem={setSelectedCountry}
-							updateItem={updateCountryData}
-							createItem={createCountryData}
-							clearSelection={clearCountrySelection}
+						collectionName="countries"
+						itemNameField="name"
+						items={countries}
+						selectedItem={selectedCountry}
+						selectItem={setSelectedCountry}
+						updateItem={updateCountryData}
+						createItem={createCountryData}
+						clearSelection={clearCountrySelection}
 					/>
-				{selectedCountry && (
+
+					{selectedCountry && (
 						<CategoryComponent
 							collectionName="states"
 							itemNameField="name"
@@ -186,23 +260,35 @@ const AdminPage = () => {
 				</div>
 			)}
 
-			{selectedType === 'Category' && 
-			<div style={{ display: 'flex' }}>
-				<CategoryComponent
-						collectionName="countries"
+			{selectedType === 'Category' && (
+				<div style={{ display: 'flex' }}>
+					<CategoryComponent
+						collectionName="categories"
 						itemNameField="name"
-						items={countries}
-						selectedItem={selectedCountry}
-						selectItem={setSelectedCountry}
-						updateItem={updateCountry}
-						createItem={createCountry}
-						clearSelection={clearCountrySelection}
+						items={categories}
+						selectedItem={selectedCategory}
+						selectItem={setSelectedCategory}
+						updateItem={updateCategoryData}
+						createItem={createCategoryData}
+						clearSelection={clearCategorySelection}
 					/>
-				
-			</div>}
-        </div>
-		
-    );
-}
+
+					{selectedCategory && (
+						<CategoryComponent
+							collectionName="subcategories"
+							itemNameField="name"
+							items={subCategories}
+							selectedItem={selectedSubCategory}
+							selectItem={setSelectedSubCategory}
+							updateItem={updateSubCategoryData}
+							createItem={createSubCategoryData}
+							clearSelection={clearSubCategorySelection}
+						/>
+					)}
+				</div>
+			)}
+		</div>
+	);
+};
 
 export default AdminPage;

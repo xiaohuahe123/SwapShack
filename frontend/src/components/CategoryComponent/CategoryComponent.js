@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import './CategoryComponent.css';
 
 const CategoryComponent = ({
-	collectionName,
-	itemNameField,
-	items,
-	selectedItem,
-	selectItem,
-	updateItem,
+	collectionName, //the name of the data collection
+	itemNameField, //the name of each item in the data collection.
+	items,    // an array representing all the item
+	selectedItem, // the currently selected item.intial is null from admin,then update it through selectItem  when trigg the clickEvent on page
+	selectItem,  //a function used to select an item
+	updateItem,  //update the selected item.
 	createItem, // New prop for creating an item
-	clearSelection,
+	clearSelection, //clear the selected item.
 	
     })=>{
     const [searchText, setSearchText] = useState('');
@@ -25,7 +25,11 @@ const CategoryComponent = ({
 
     const handleCreateItem = () => {
 		if (newItemName) {
-			createItem(newItemName); // Call the createItem prop with the new item name
+
+			createItem(newItemName); 
+			// calling the passed createCountryData function and
+			// passing newItemName as a parameter to the  countryName in the function "createCountryData".
+			//then the createCountry function is used to create the new country data.
 			setNewItemName(''); // Reset the new item name input
 		}
 	};
@@ -33,6 +37,9 @@ const CategoryComponent = ({
 	const handleUpdate = () => {
 		if (selectedItem && selectedItem[itemNameField]) {
 			updateItem(selectedItem);
+			// calling the passed updateCountryData function and
+			// passing selectedItem as a parameter to the  updatedCountry in the function "updateCountryData".
+			//then the updatedCountry function is used to update the  country data.
 		}
 	};
 	

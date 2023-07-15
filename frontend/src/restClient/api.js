@@ -3,6 +3,7 @@ import axios from 'axios';
 const instance = axios.create({
 	baseURL: 'http://localhost:4000/api/' // Replace with your base URL
 });
+
 // Set default headers
 instance.defaults.headers.common['Content-Type'] = 'application/json';
 
@@ -46,6 +47,7 @@ export const fetchCities = async (countryId, stateId) => {
 		console.error('Error fetching cities:', error);
 	}
 };
+
 export const fetchCategories = async () => {
 	try {
 		const response = await instance.get('/category');
@@ -64,9 +66,6 @@ export const fetchSubCategories = async (categoryId) => {
 	}
 };
 
-
-
-
 export const updateCountry = async (updatedCountry) => {
 	try {
 		await instance.put(`/location/${updatedCountry.id}`, updatedCountry);
@@ -74,6 +73,7 @@ export const updateCountry = async (updatedCountry) => {
 		console.error('Error updating country:', error);
 	}
 };
+
 export const updateState = async (countryId, updatedState) => {
 	try {
 		await instance.put(`/location/${countryId}/states/${updatedState.id}`, updatedState);
@@ -90,6 +90,14 @@ export const updateCity = async (countryId, stateId, updatedCity) => {
 	}
 };
 
+export const updateSubCategory = async (categoryId, updatedSubCategory) => {
+	try {
+		await instance.put(`/category/${categoryId}/subCategories/${updatedSubCategory.id}`, updatedSubCategory);
+	} catch (error) {
+		console.error('Error updating subcategory:', error);
+	}
+};
+
 export const createCountry = async (countryName) => {
 	try {
 		const response = await instance.post('/location', { name: countryName });
@@ -98,6 +106,7 @@ export const createCountry = async (countryName) => {
 		console.error('Error creating country:', error);
 	}
 };
+
 export const createState = async (countryId, stateName) => {
 	try {
 		const response = await instance.post(`/location/${countryId}/states`, { name: stateName });
@@ -115,6 +124,25 @@ export const createCity = async (countryId, stateId, cityName) => {
 		console.error('Error creating city:', error);
 	}
 };
+
+export const createCategory = async (categoryName) => {
+	try {
+		const response = await instance.post('/category', { name: categoryName });
+		return response.data;
+	} catch (error) {
+		console.error('Error creating category:', error);
+	}
+};
+
+export const createSubCategory = async (categoryId, subCategoryName) => {
+	try {
+		const response = await instance.post(`/category/${categoryId}/subCategories`, { name: subCategoryName });
+		return response.data;
+	} catch (error) {
+		console.error('Error creating subcategory:', error);
+	}
+};
+
 
 
 export default instance;
