@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Categories } = require('../config');
+const { Countries } = require('../config');
 const locationRouter = Router();
 
 // Create a route to fetch the countries data
