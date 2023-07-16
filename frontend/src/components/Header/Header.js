@@ -3,6 +3,7 @@ import './Header.css';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import { NavLink } from 'react-router-dom';
 import BartContext from '../../store/bartContext';
+import { ADMIN_EMAIL } from '../../utils/Constants';
 
 const Header = ({ setIsPane }) => {
 	const { login, isLoggedIn, logout } = useContext(BartContext);
