@@ -7,14 +7,16 @@ import { ADMIN_EMAIL } from '../../utils/Constants';
 
 const Header = ({ setIsPane }) => {
 	const { login, isLoggedIn, logout } = useContext(BartContext);
-
+	useEffect(() => {}, [user]);
 	return (
 		<div className="header">
 			<div className="header__Container">
 				<div className="header__Left">
 					<div className="header__Icon">
 						<h3 className="header__title" style={{ fontWeight: 'bold', fontStyle: 'italic', fontSize:"70px"}}>
-							SwapShack
+							<NavLink style={{ textDecoration: 'none' }} to="/">
+								SwapShack
+							</NavLink>
 						</h3>
 					</div>
 				</div>
