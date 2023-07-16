@@ -1,26 +1,35 @@
 import React, { useContext, useEffect } from 'react';
 import './Home.css';
-import ProductItems from '../Store/StoreRight/ProductItems/ProductItems';
 import { Link } from 'react-router-dom';
 import BartContext from '../../store/bartContext';
-import { Data } from '../Data/Data';
+import PostList from '../Posts/PostList';
+import SubSection from '../SubSection/SubSection';
 
-const Home=() =>{
-    const {homeData, SetHomeData} =useContext(BarContext);
+const Home = () => {
+	const { isLoggedIn } = useContext(BartContext);
+	useEffect(() => {}, []);
 
-    return(
-        <div className="home">
-            <div  className="home__container">
-                <ProductItems   products={homeData}/> 
-            </div>
-            <div className="home__btnContainer">
-                <Link to="/store">
-                    <button  className="home__btn2">
-                        VIEW ALL PRODUCTS
-                    </button>
-                </Link>
-            </div>
-        </div>
-    )
-}
+	return (
+		<div className="login__container">
+			<div className="login__subContainer">
+				<SubSection section="HOME" />
+				<div className="home__container2">
+					<div className="home__btnContainer">
+						<Link to="/create-post">
+							<button className="home__btn2">Create Post</button>
+						</Link>
+					</div>
+					<br />
+					<PostList />
+				</div>
+				<div className="home__btnContainer">
+					<Link to="/#">
+						<button className="home__btn2">Home</button>
+					</Link>
+				</div>
+			</div>
+		</div>
+	);
+};
+
 export default Home;
