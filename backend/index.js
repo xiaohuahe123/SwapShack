@@ -10,12 +10,12 @@ app.use(cors());
 const PORT = 4000;
 
 // Serve static files from the 'frontend/build' directory
-app.use(express.static(path.join(__dirname,"..", 'frontend', 'build')));
+//app.use(express.static(path.join(__dirname,"..", 'frontend', 'build')));
 
 // Route all requests to the React app
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,"..", 'frontend', 'build', 'index.html'));
-});
+//app.get('/', (req, res) => {
+//  res.sendFile(path.join(__dirname,"..", 'frontend', 'build', 'index.html'));
+//});
 
 app.use('/api', routes);
 
@@ -39,14 +39,14 @@ app.post('/update', async (req, res) => {
 	delete req.body.id;
 	const data = req.body;
 	await Users.doc(id).update(data);
-	res.send({ msg: 'Updated' });
+	res.send({ msg: 'User Updated' });
 });
 
 //DELETE info
 app.post('/delete', async (req, res) => {
 	const id = req.body.id;
 	await Users.doc(id).delete();
-	res.send({ msg: 'Deleted' }); 
+	res.send({ msg: 'User Deleted' }); 
 });
 
 app.listen(PORT, () => console.log(`Up & RUnning at http://localhost:${PORT}`));
