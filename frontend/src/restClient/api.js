@@ -143,6 +143,28 @@ export const createSubCategory = async (categoryId, subCategoryName) => {
 	}
 };
 
+// Get all posts
+export const getAllPosts = async () => {
+	try {
+		const response = await instance.get(`/post/posts`);
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching posts:', error);
+		throw error;
+	}
+};
+
+// Get a single post by ID
+export const getPostById = async (id) => {
+	try {
+		const response = await instance.get(`/post/posts/${id}`);
+		return response.data;
+	} catch (error) {
+		console.error(`Error fetching post with ID ${id}:`, error);
+		throw error;
+	}
+};
+
 
 
 export default instance;
