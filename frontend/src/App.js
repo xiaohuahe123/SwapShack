@@ -5,6 +5,8 @@ import BartProvider from './store/BartProvider';
 import { Routes, Route } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Profile from './components/Profile/Profile';
+import Home from './components/Home/Home';
+
 
 //fetch data asynchronously using the React.lazy Inside the Suspense boundary
 const Login = React.lazy(() => import('./components/Login/Login'));

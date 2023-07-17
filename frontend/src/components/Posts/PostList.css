@@ -1,0 +1,48 @@
+.post-list {
+    margin: 20px;
+  }
+  
+  .post-list h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .post-list__item {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+  }
+  
+  .post-list__title {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  .post-list__description {
+    margin-bottom: 10px;
+  }
+  
+  .post-list__edit-button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .post-list__view-link {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .post-list__divider {
+    margin-top: 10px;
+    border: none;
+    border-top: 1px solid #ccc;
+  }
+   
