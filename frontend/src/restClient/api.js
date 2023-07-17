@@ -196,6 +196,25 @@ export const deletePost = async (id) => {
 	}
 };
 
+// Add a post to a user's favorites
+export const addPostToFavorites = async (userId, postId) => {
+	try {
+		await instance.put(`/users/${userId}/favorites`, { postId });
+	} catch (error) {
+		console.error(`Error adding post ${postId} to favorites of user ${userId}:`, error);
+		throw error;
+	}
+};
+
+// Remove a post from a user's favorites
+export const removePostFromFavorites = async (userId, postId) => {
+	try {
+		await instance.delete(`/users/${userId}/favorites/${postId}`);
+	} catch (error) {
+		console.error(`Error removing post ${postId} from favorites of user ${userId}:`, error);
+		throw error;
+	}
+};
 
 
 
