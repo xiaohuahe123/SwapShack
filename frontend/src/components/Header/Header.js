@@ -6,7 +6,7 @@ import BartContext from '../../store/bartContext';
 import { ADMIN_EMAIL } from '../../utils/Constants';
 
 const Header = ({ setIsPane }) => {
-	const { login, isLoggedIn, logout } = useContext(BartContext);
+	const { isLoggedIn, logout, user } = useContext(BartContext);
 	useEffect(() => {}, [user]);
 	return (
 		<div className="header">
