@@ -165,6 +165,38 @@ export const getPostById = async (id) => {
 	}
 };
 
+// Create a new post
+export const createPost = async (postData) => {
+	try {
+		const response = await instance.post(`/post/posts`, postData);
+		return response.data.id;
+	} catch (error) {
+		console.error('Error creating post:', error);
+		throw error;
+	}
+};
+
+// Update an existing post
+export const updatePost = async (id, postData) => {
+	try {
+		await instance.put(`/post/posts/${id}`, postData);
+	} catch (error) {
+		console.error(`Error updating post with ID ${id}:`, error);
+		throw error;
+	}
+};
+
+// Delete a post by ID
+export const deletePost = async (id) => {
+	try {
+		await instance.delete(`/post/posts/${id}`);
+	} catch (error) {
+		console.error(`Error deleting post with ID ${id}:`, error);
+		throw error;
+	}
+};
+
+
 
 
 export default instance;
