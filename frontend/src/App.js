@@ -24,7 +24,8 @@ function App() {
 				<div className="app">
 					<Header setIsPane={setIsMove} />
 					<Routes>
-						<Route path="/" element={<AdminComponent />} />
+						<Route path="/" element={<Home />} />
+						<Route path="/admin" element={<AdminComponent />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/sign-up" element={<SignUp />} />
 						<Route path="/profile" element={<Profile />} />
