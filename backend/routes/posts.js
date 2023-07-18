@@ -25,8 +25,21 @@ async function createPost(postData) {
 	return postRef.id;
 }
 
+// Update an existing post
+async function updatePost(id, postData) {
+	const postRef = Posts.doc(id);
+	await postRef.update(postData);
+}
+
+// Delete a post by ID
+async function deletePost(id) {
+	await Posts.doc(id).delete();
+}
+
 module.exports = {
 	getAllPosts,
 	getPostById,
-	createPost
+	createPost,
+	updatePost,
+	deletePost
 };

@@ -37,4 +37,26 @@ postRouter.post('/posts', async (req, res) => {
 	}
 });
 
+// Update an existing post
+postRouter.put('/posts/:id', async (req, res) => {
+	try {
+		const postId = req.params.id;
+		await posts.updatePost(postId, req.body);
+		res.sendStatus(200);
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
+
+// Delete a post
+postRouter.delete('/posts/:id', async (req, res) => {
+	try {
+		const postId = req.params.id;
+		await posts.deletePost(postId);
+		res.sendStatus(200);
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
+
 module.exports = postRouter;
