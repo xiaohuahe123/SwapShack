@@ -27,7 +27,7 @@ const ViewPost = () => {
 
 	return (
 		<div className="view-post">
-			<SubSection name="View" />
+			<SubSection section="View" />
 			<h2>View Post</h2>
 			<h3 className="post-title">Title: {post.name}</h3>
 			<p className="post-description">Description: {post.description}</p>
