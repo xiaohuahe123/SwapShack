@@ -143,6 +143,79 @@ export const createSubCategory = async (categoryId, subCategoryName) => {
 	}
 };
 
+// Get all posts
+export const getAllPosts = async () => {
+	try {
+		const response = await instance.get(`/post/posts`);
+		return response.data;
+	} catch (error) {
+		console.error('Error fetching posts:', error);
+		throw error;
+	}
+};
+
+// Get a single post by ID
+export const getPostById = async (id) => {
+	try {
+		const response = await instance.get(`/post/posts/${id}`);
+		return response.data;
+	} catch (error) {
+		console.error(`Error fetching post with ID ${id}:`, error);
+		throw error;
+	}
+};
+
+// Create a new post
+export const createPost = async (postData) => {
+	try {
+		const response = await instance.post(`/post/posts`, postData);
+		return response.data.id;
+	} catch (error) {
+		console.error('Error creating post:', error);
+		throw error;
+	}
+};
+
+// Update an existing post
+export const updatePost = async (id, postData) => {
+	try {
+		await instance.put(`/post/posts/${id}`, postData);
+	} catch (error) {
+		console.error(`Error updating post with ID ${id}:`, error);
+		throw error;
+	}
+};
+
+// Delete a post by ID
+export const deletePost = async (id) => {
+	try {
+		await instance.delete(`/post/posts/${id}`);
+	} catch (error) {
+		console.error(`Error deleting post with ID ${id}:`, error);
+		throw error;
+	}
+};
+
+// Add a post to a user's favorites
+export const addPostToFavorites = async (userId, postId) => {
+	try {
+		await instance.put(`/users/${userId}/favorites`, { postId });
+	} catch (error) {
+		console.error(`Error adding post ${postId} to favorites of user ${userId}:`, error);
+		throw error;
+	}
+};
+
+// Remove a post from a user's favorites
+export const removePostFromFavorites = async (userId, postId) => {
+	try {
+		await instance.delete(`/users/${userId}/favorites/${postId}`);
+	} catch (error) {
+		console.error(`Error removing post ${postId} from favorites of user ${userId}:`, error);
+		throw error;
+	}
+};
+
 
 
 export default instance;
