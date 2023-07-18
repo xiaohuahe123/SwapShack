@@ -12,4 +12,29 @@ postRouter.get('/posts', async (req, res) => {
 	}
 }); 
 
+// Get a single post by ID
+postRouter.get('/posts/:id', async (req, res) => {
+	try {
+		const postId = req.params.id;
+		const post = await posts.getPostById(postId);
+		if (post) {
+			res.json(post);
+		} else {
+			res.status(404).send('Post not found');
+		}
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
+
+// Create a new post
+postRouter.post('/posts', async (req, res) => {
+	try {
+		const postId = await posts.createPost(req.body);
+		res.json({ id: postId });
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
+
 module.exports = postRouter;

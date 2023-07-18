@@ -25,4 +25,8 @@ async function createPost(postData) {
 	return postRef.id;
 }
 
-module.exports = getAllPosts;
+module.exports = {
+	getAllPosts,
+	getPostById,
+	createPost
+};
