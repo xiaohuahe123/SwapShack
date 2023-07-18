@@ -36,10 +36,28 @@ async function deletePost(id) {
 	await Posts.doc(id).delete();
 }
 
+// Add a post to a user's favorites
+async function addPostToFavorites(userId, postId) {
+	const userRef = Users.doc(userId);
+	await userRef.update({
+		favorites: db.FieldValue.arrayUnion(postId)
+	});
+}
+
+// Remove a post from a user's favorites
+async function removePostFromFavorites(userId, postId) {
+	const userRef = Users.doc(userId);
+	await userRef.update({
+		favorites: db.FieldValue.arrayRemove(postId)
+	});
+}
+
 module.exports = {
 	getAllPosts,
 	getPostById,
 	createPost,
 	updatePost,
-	deletePost
+	deletePost,
+	addPostToFavorites,
+	removePostFromFavorites
 };

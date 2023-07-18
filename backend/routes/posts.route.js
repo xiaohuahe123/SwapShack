@@ -59,4 +59,28 @@ postRouter.delete('/posts/:id', async (req, res) => {
 	}
 });
 
+// Add a post to a user's favorites
+postRouter.post('/users/:userId/favorites/:postId', async (req, res) => {
+	try {
+		const userId = req.params.userId;
+		const postId = req.params.postId;
+		await posts.addPostToFavorites(userId, postId);
+		res.sendStatus(200);
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
+
+// Remove a post from a user's favorites
+postRouter.delete('/users/:userId/favorites/:postId', async (req, res) => {
+	try {
+		const userId = req.params.userId;
+		const postId = req.params.postId;
+		await posts.removePostFromFavorites(userId, postId);
+		res.sendStatus(200);
+	} catch (error) {
+		res.status(500).send(error);
+	}
+});
+
 module.exports = postRouter;
