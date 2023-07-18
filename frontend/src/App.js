@@ -5,6 +5,8 @@ import BartProvider from './store/BartProvider';
 import { Routes, Route } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import Profile from './components/Profile/Profile';
+import ViewPost from './components/Posts/PostView';
+
 import Home from './components/Home/Home';
 
 
@@ -28,6 +30,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<Home />} />
 						<Route path="/admin" element={<AdminComponent />} />
+						<Route path="/view-post/:postId" element={<ViewPost />} />
 						<Route path="/login" element={<Login />} />
 						<Route path="/sign-up" element={<SignUp />} />
 						<Route path="/profile" element={<Profile />} />
