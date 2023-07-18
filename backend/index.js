@@ -9,10 +9,6 @@ app.use(cors());
 
 const PORT = 4000;
 
-// Route all requests to the React app
-app.get('/', (req, res) => {
-});
-
 app.use('/api', routes);
 
 //GET user info
