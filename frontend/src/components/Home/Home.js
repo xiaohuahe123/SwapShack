@@ -7,7 +7,7 @@ import SubSection from '../SubSection/SubSection';
 
 const Home = () => {
 	const { isLoggedIn } = useContext(BartContext);
-	useEffect(() => {}, []);
+	//useEffect(() => {}, []);
 
 	return (
 		<div className="login__container">

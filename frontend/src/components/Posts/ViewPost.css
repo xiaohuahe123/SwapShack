@@ -1,0 +1,23 @@
+.view-post {
+    margin: 20px;
+  }
+  
+  .loading {
+    margin: 20px;
+    font-size: 18px;
+    color: #999;
+  }
+  
+  .post-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .post-description {
+    margin-bottom: 10px;
+  }
+  
+  .post-author {
+    margin-bottom: 10px;
+  }
+  

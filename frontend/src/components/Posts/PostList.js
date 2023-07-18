@@ -40,10 +40,10 @@ const PostList = () => {
 							Edit
 						</button>
 					)}
-					{/* <Link to={`/view-post/${post.id}`} className="post-list__view-link">
+					<Link to={`/view-post/${post.id}`} className="post-list__view-link">
 						View
 					</Link>
-					<hr className="post-list__divider" /> */}
+					<hr className="post-list__divider" />
 				</div>
 			))}
 		</div>
