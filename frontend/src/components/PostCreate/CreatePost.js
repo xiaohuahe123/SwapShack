@@ -52,7 +52,7 @@ const CreatePost = ({ id, createPost, editPost }) => {
 			<h2>{isEditMode ? 'Edit Post' : 'Create Post'}</h2>
 			<input type="text" name="name" value={post.name} onChange={handleInputChange} placeholder="Name" className="create-post__input" />
 			<textarea name="description" value={post.description} onChange={handleInputChange} placeholder="Description" className="create-post__textarea" />
-			<input type="text" name="price" value={post.price} onChange={handleInputChange} placeholder="Price" className="create-post__input" />
+			<input type="text" name="quantity" value={post.quantity} onChange={handleInputChange} placeholder="quantity" className="create-post__input" />
 			<input type="text" name="condition" value={post.condition} onChange={handleInputChange} placeholder="Condition" className="create-post__input" />
 			<LocationDropdown onSelectionChange={handleSelectionChange} selectedCountryId={post.countryId} selectedStateId={post.stateId} selectedCityId={post.cityId} type={LOCATION} />
 			<LocationDropdown onSelectionChange={handleSelectionChange} selectedCategoryId={post.categoryId} selectedSubCategoryId={post.subCategoryId} type={CATEGORY} />
