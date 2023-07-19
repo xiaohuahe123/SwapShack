@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BartContext from '../../store/bartContext';
 import SubSection from '../SubSection/SubSection';
 import './Profile.css';
