@@ -40,6 +40,7 @@ const CategoryComponent = ({
 			// calling the passed updateCountryData function and
 			// passing selectedItem as a parameter to the  updatedCountry in the function "updateCountryData".
 			//then the updatedCountry function is used to update the  country data.
+			alert("update successful");
 		}
 	};
 	

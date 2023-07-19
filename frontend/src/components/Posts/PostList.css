@@ -9,7 +9,7 @@
   
   .post-list__item {
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     background-color: #f5f5f5;
     border-radius: 5px;
   }
@@ -41,7 +41,7 @@
   }
   
   .post-list__divider {
-    margin-top: 10px;
+    margin-top: 3px;
     border: none;
     border-top: 1px solid #ccc;
   }
