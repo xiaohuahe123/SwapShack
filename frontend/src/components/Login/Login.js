@@ -14,7 +14,7 @@ const Login = () => {
 	const navigate = useNavigate();
     useEffect(() => {
 		if (isLoggedIn === true) {
-			navigate('/home');
+			navigate('/');
 			setShowLogout(true);
 		}
 	}, []);
