@@ -33,9 +33,9 @@ function App() {
 						<Route path="/" element={<Home />} />
 						<Route path="/create-post" element={<PostCreate />} />
 						<Route path="/edit-post/:postId" element={<PostCreate />} />
-						<Route path="/admin" element={<AdminComponent />} />
 						<Route path="/view-post/:postId" element={<ViewPost />} />
-						<Route path="/login" element={<Login />} />
+						<Route path="/admin" element={<AdminComponent />} />
+				        <Route path="/login" element={<Login />} />
 						<Route path="/sign-up" element={<SignUp />} />
 						<Route path="/profile" element={<Profile />} />
 					</Routes>
