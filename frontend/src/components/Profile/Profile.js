@@ -24,11 +24,7 @@ const Profile = () => {
 			return navigate('/login');
 		}
 
-		// Set up the headers for the API request
-		const headers = {
-			'Content-Type': 'application/json',
-			Authorization: `Bearer ${token}`
-		};
+		
 		try {
 			// Fetch the user's profile data from the server using the API
 			api.get(`/profile/${user.id}`, { headers }).then((res) => {
@@ -43,7 +39,7 @@ const Profile = () => {
 			console.log(error);
 			alert(error.message);
 		}
-	}, []);
+	}, [isLoggedIn]);
 
 	const handleInputChange = (event) => {
 
@@ -60,11 +56,7 @@ const Profile = () => {
 		e.preventDefault();
 		try {
 
-			// Set up the headers for the API request
-			const headers = {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`
-			};
+			
 
 			// Send a PUT request to update the user's profile data
 			const response = await api.put(`/profile/${user.id}`, profile, { headers });
