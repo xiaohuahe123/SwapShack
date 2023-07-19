@@ -42,7 +42,7 @@ const Login = () => {
 				alert('Login successful');
 				console.log('Login successful');
 				login(data.token, data.user);
-				navigate('/home');
+				navigate('/');
 				console.log(isLoggedIn);
 			} else if (data.error) {
 				throw data.error;
