@@ -8,7 +8,7 @@ import CreatePost from './CreatePost';
 
 const PostCreate = () => {
 	const { isLoggedIn, user } = useContext(BartContext);
-	const [post, setPost] = useState({});
+	//const [post, setPost] = useState({});
 	const navigate = useNavigate();
 	const { postId } = useParams();
 
