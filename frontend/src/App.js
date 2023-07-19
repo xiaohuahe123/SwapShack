@@ -4,7 +4,9 @@ import Header from './components/Header/Header';
 import BartProvider from './store/BartProvider';
 import { Routes, Route } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
+import PostCreate from './components/PostCreate/PostCreate';
 import Profile from './components/Profile/Profile';
+import PostList from './components/Posts/PostList';
 import ViewPost from './components/Posts/PostView';
 
 import Home from './components/Home/Home';
@@ -29,6 +31,8 @@ function App() {
 					<Header setIsPane={setIsMove} />
 					<Routes>
 						<Route path="/" element={<Home />} />
+						<Route path="/create-post" element={<PostCreate />} />
+						<Route path="/edit-post/:postId" element={<PostCreate />} />
 						<Route path="/admin" element={<AdminComponent />} />
 						<Route path="/view-post/:postId" element={<ViewPost />} />
 						<Route path="/login" element={<Login />} />
