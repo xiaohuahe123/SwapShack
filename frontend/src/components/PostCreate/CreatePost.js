@@ -17,7 +17,7 @@ const CreatePost = ({ id, createPost, editPost }) => {
 		subCategoryId: '',
 		countryId: '',
 		cityId: '',
-		price: 0,
+	 quantity: 0,
 		condition: '',
 		location: ''
 	});
