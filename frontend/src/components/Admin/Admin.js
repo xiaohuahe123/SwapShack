@@ -9,6 +9,7 @@ import {
 	updateCountry,
 	updateState,
 	updateCity,
+	updateCategory,
 	updateSubCategory,
 	createCountry,
 	createState,
@@ -147,7 +148,7 @@ const AdminPage = () => {
 
 	const updateCategoryData = async (updatedCategory) => {
 		try {
-			await updateCountry(updatedCategory);
+			await updateCategory(updatedCategory);
 
 			// Optionally, you can refetch the categories data after updating
 			const categoriesData = await fetchCategories();

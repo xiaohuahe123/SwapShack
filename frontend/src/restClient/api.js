@@ -90,6 +90,15 @@ export const updateCity = async (countryId, stateId, updatedCity) => {
 	}
 };
 
+
+export const updateCategory = async (updatedCategory) => {
+	try {
+		await instance.put(`/category/${updatedCategory.id}`, updatedCategory);
+	} catch (error) {
+		console.error('Error updating subcategory:', error);
+	}
+};
+
 export const updateSubCategory = async (categoryId, updatedSubCategory) => {
 	try {
 		await instance.put(`/category/${categoryId}/subCategories/${updatedSubCategory.id}`, updatedSubCategory);
