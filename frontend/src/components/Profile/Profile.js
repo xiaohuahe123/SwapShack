@@ -7,7 +7,7 @@ import api from '../../restClient/api';
 
 const Profile = () => {
 	// Extract necessary data from the BartContext using the useContext hook
-	const { isLoggedIn, user, token, setUser } = useContext(BartContext);
+	const { isLoggedIn, user, headers, setUser } = useContext(BartContext);
 
 	// State variables to manage the profile data
 	const [profile, setProfile] = useState(user);

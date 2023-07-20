@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LocationDropdown from '../LocationDropDown/LocationDropDown';
+import LocationDropdown from '../LocationDropDown/LocationDropdown';
 import { CATEGORY, LOCATION } from '../../utils/Constants';
 import { getPostById } from '../../restClient/api';
 // import LocationDropdown from './LocationDropdown';
