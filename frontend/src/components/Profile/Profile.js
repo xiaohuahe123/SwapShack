@@ -30,8 +30,8 @@ const Profile = () => {
 				if (res.data) {
 
 						// Update both the user and profile states with the fetched data
-					setUser(res.data);
-					setProfile(res.data);
+					setUser({...res.data});
+					setProfile({...res.data});
 				}
 			});
 		} catch (error) {
